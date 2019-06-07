@@ -13,7 +13,11 @@ An app to help the user decide what to make for dinner based off what they have 
 
 # Sketch of Final Product
 
-TBD
+* User enters ingredients
+* Compares against recommended recipes
+** If none are found, redirect to a page like "Sounds like you are having takeout tonight" or suggesting local restaurants
+* Suggestions are returned to user
+* Can rank favorite meals or pin favorites for later
 
 # APIs to be Used
 
@@ -24,6 +28,6 @@ TBD
 
 # Rough Breakdown of Tasks
 
-* 
-*
-* 
+* Front-end UI (Maya)
+* Database creation/maintenance (Hilary)
+* API Routes/middleware (Jennifer)
