@@ -1,3 +1,16 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+body{
+  background:
+  url(./001.jpeg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size:cover;
+  background-size:cover;
+
+  font-family: 'Libre Baskerville', serif;
+/* font-family: 'Josefin Sans', sans-serif;
+font-family: 'Libre Franklin', sans-serif; */
+ } 
