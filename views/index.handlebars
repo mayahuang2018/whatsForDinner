@@ -1,3 +1,15 @@
+
+ <nav class="N/A transparent">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">What's for dinner?</a>
+      <ul id="nav-mobile" class="right">
+        <li><a href="badges.html"> <i class="material-icons">account_circle</i></a></li>
+        <li><a href="add.html"> <i class="material-icons">add_box</i></a></li>
+      </ul>
+    </div>
+  </nav> 
+
+
 <div id="home">
   <div class="container">
     <div class="row">
@@ -28,6 +40,26 @@
     </div>
   </div>
 </div>
+
+<!--Sample from "task saver" class assignment-->
+<h1>Task Saver</h1>
+
+<h3>Save the tasks you need to get to later</h3>
+
+<ul>
+  {{#each tasks}}
+  	<li>
+  	   <p>ID: {{this.id}}</p>
+       <p>Task: {{this.task}}</p>
+  	</li>
+  {{/each}}
+</ul>
+
+<form action="/" method="POST">
+	<textarea type="text" name="task"></textarea>
+
+	<button type="submit">Submit</button>
+</form> --}}
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
