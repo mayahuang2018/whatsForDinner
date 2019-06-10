@@ -8,9 +8,11 @@ var db = require("./models");
 var passport = require("passport"),
   LocalStrategy = require("passport-local").Strategy;
 
+var session = require("express-session");
 
 var app = express();
 var PORT = process.env.PORT || 6258;
+
 
 // Middleware
 app.use(express.urlencoded({
@@ -18,36 +20,9 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(express.static("public"));
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-// passport
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-  },
-  function (username, password, done) {
-    User.findOne({
-      username: username
-    }, function (err, user) {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, {
-          message: "Incorrect username."
-        });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, {
-          message: "Incorrect password."
-        });
-      }
-      return done(null, user);
-    });
-  }
-));
 
 // Handlebars
 app.engine(

@@ -4,42 +4,51 @@
 
 // Dependencies
 // =============================================================
-var path = require("path");
+// var path = require("path");
+
+const isAuthenticated = require("../config/isAuthenticated");
+
 
 // Routes
 // =============================================================
 module.exports = function(app) {
 
-  // Each of the below routes just handles the HTML page that the user gets sent to.
-
-  // index route loads view.html
-  app.get("/", function(req, res) {
-    res.render(path.join(__dirname, "../views/index.handlebars"));
+  // if does not have account send to signup page
+  app.get("/", function(req, res){
+    if (!req.User) {
+      res.render("/signup");
+    }
+    res.render("../views/login.handlebars");
   });
+
+  app.get("/signup", function(req, res) {
+    res.render("../views/signup.handlebars");
+  })
+
+  app.get("/login", function(req, res){
+    if (req.User) {
+      res.redirect("/index")
+    }
+    res.render("../views/login.handlebars");
+  })
+
+  app.get("/index", isAuthenticated, function(req, res) {
+    res.render("../views/index.handlebars")
+  })
 
   // 404 route loads 404.handlebars
   app.get("/404", function(req, res) {
-    res.render(path.join(__dirname, "../views/404.handlebars"));
-  });
-
-  // login route
-  app.get("/login", function(req, res) {
-    res.render(path.join(__dirname, "../views/login.handlebars"));
-  });
-
-  // recipies search route
-  app.get("/search", function(req, res) {
-    res.render(path.join(__dirname, "../views/search.handlebars"));
+    res.render("../views/404.handlebars");
   });
 
    // recipies search route
    app.get("/showMatches", function(req, res) {
-    res.render(path.join(__dirname, "../views/showMatches.handlebars"));
+    res.render("../views/showMatches.handlebars");
   });
 
    // recipies search route
    app.get("/showShopList", function(req, res) {
-    res.render(path.join(__dirname, "../views/showShopList.handlebars"));
+    res.render("../views/showShopList.handlebars");
   });
 
 };
