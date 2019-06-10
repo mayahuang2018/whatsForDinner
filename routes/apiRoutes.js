@@ -9,19 +9,17 @@ module.exports = function(app) {
     });
   });
 
-  
-
   // shop-list
   app.get("/api/shoplist", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+    db.Dinner.create(req.body).then(function(dbDinner) {
+      res.json(dbDinner);
     });
   });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
+//   // Delete an example by id
+//   app.delete("/api/examples/:id", function(req, res) {
+//     db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
+//       res.json(dbExample);
+//     });
+//   });
 };

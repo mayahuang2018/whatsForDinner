@@ -7,15 +7,15 @@ $(function() {
             password: $("#password").text().val().trim();
         };
 
-        $.ajax("api/users", {
-            type: "POST",
-            data: newUser
-        }).then(
-            function() {
-                console.log("created new user & password");
-                location.reload();
-            }
-        )
+        // $.ajax("api/users", {
+        //     type: "POST",
+        //     data: newUser
+        // }).then(
+        //     function() {
+        //         console.log("created new user & password");
+        //         location.reload();
+        //     }
+        // )
     });
 
 
@@ -35,26 +35,20 @@ $(function() {
             console.log(response);
 
             results = response.data;
-            $.each(results, function() {
 
-                const recipeDiv = $("<div class='recipeDiv'>");
-
-                const displayRecipe = $("<div>")
-                    .html("src", results[i])
-                    .data("i", i);
-
-                //console.log(displayGif);
-                //console.log(movingGif);
-
-                recipeDiv.html(displayRecipe);
-
-                $("#recipes").prepend(recipeDiv);
+            $.ajax("/api/recipies", {
+                type: "POST",
+                data: results
+            }).then(
+                function() {
+                    console.log("added new recipe");
+                    location.reload();
+                }
+            )
             }); //end of each
         }); //end of then
-    })
+    });
 
-
-});
 
 
     
