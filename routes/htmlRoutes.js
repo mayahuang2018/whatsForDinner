@@ -6,9 +6,6 @@
 // =============================================================
 // var path = require("path");
 
-const isAuthenticated = require("../config/isAuthenticated");
-
-
 // Routes
 // =============================================================
 module.exports = function(app) {
@@ -32,9 +29,6 @@ module.exports = function(app) {
     res.render("../views/login.handlebars");
   })
 
-  app.get("/index", isAuthenticated, function(req, res) {
-    res.render("../views/index.handlebars")
-  })
 
   // 404 route loads 404.handlebars
   app.get("/404", function(req, res) {

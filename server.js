@@ -5,11 +5,6 @@ var exphbs = require("express-handlebars");
 
 var db = require("./models");
 
-var passport = require("passport"),
-  LocalStrategy = require("passport-local").Strategy;
-
-var session = require("express-session");
-
 var app = express();
 var PORT = process.env.PORT || 6258;
 
@@ -20,9 +15,11 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(express.static("public"));
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true}));
-app.use(passport.initialize());
-app.use(passport.session());
+
+
+// Routes
+
+require("./routes/htmlRoutes")(app);
 
 // Handlebars
 app.engine(
@@ -33,9 +30,7 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-// Routes
-require("./routes/login-apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+
 
 var syncOptions = {
   force: false
