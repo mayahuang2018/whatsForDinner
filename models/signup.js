@@ -23,10 +23,6 @@
             type: DataTypes.TEXT
         },
  
-        about: {
-            type: DataTypes.TEXT
-        },
- 
         email: {
             type: DataTypes.STRING,
             validate: {
