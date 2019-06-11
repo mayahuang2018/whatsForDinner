@@ -1,45 +1,29 @@
-
- <nav class="N/A transparent z-depth-5">
+<nav class="N/A transparent z-depth-5 nav-extended">
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">What's for dinner?</a>
+      <a href="/" class="brand-logo">What's for dinner?</a>
       <ul id="nav-mobile" class="right">
-        <li><a href="badges.html"> <i class="material-icons">account_circle</i></a></li>
-        <li><a href="add.html"> <i class="material-icons">add_box</i></a></li>
+        <li><a href="/example/:id"> <i class="material-icons">account_circle</i></a></li>
+        <li><a href="/create"> <i class="material-icons">add_box</i></a></li>
       </ul>
     </div>
   </nav> 
 
-{{!-- 
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
+  <div class="row z-depth-5" id="searchInput">
+        <div class="input-field col s11">
+          <div class="search-wrapper">
+            <h5 class="#90a4ae blue-grey-text text-lighten-2">{{msg}}</h5>
+            <input id="search" placeholder="Search">
+            <a class="btn-floating #90a4ae blue-grey lighten-2"><i class="material-icons">search</i></a>
+
+            <div class="search-results">
+
+
+            </div>
+
+       </div>
+   </div>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script> --}}
+
+
+      
