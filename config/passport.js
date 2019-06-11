@@ -1,41 +1,45 @@
-module.exports = (passport, user) => {
-    const bc = require("bcryptjs");
-    const LocalStrategy = require("passport-local").Strategy;
-    // const User = user;
-    const db = require("../models");
+// const mysql = require("mysql2");
 
+
+module.exports = (passport, users) => {
+
+const LocalStrategy = require("passport-local").Strategy;
+const bc = require("bcryptjs");
+const db = require("../models");
+const Users = require("../models/users")
+        
     passport.use(
         'local-signup',
         new LocalStrategy({
-                usernameField: 'email',
-                passwordField: 'password',
-                passReqToCallback: true // allows us to pass back the entire request to the callback
+                usernameField: 'username',
             },
 
-            function (req, email, password, done) {
-                var generateHash = password => {
+            function (req, username, password, done) {
+                const generateHash = password => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
                 };
 
-                db.users.findOne({
+                db.Users.findOne({
                     where: {
                         email: email
                     }
-                }).then(users => {
-                    if (users) {
+                }).then(Users => {
+                    if (Users) {
                         return done(null, false, {
-                            message: 'That email is already taken'
+                            message: 'That username is already taken'
                         });
                     } else {
-                        var userPassword = generateHash(password);
-                        var data = {
-                            email: email,
+                        const userPassword = generateHash(password);
+                        const data = {
+                            username: username,
+                            email: req.body.email,
                             password: userPassword,
                             firstname: req.body.firstname,
                             lastname: req.body.lastname
                         };
 
-                        db.users.create(data).then((newUser, created) => {
+                        db.Users.create(data).then((newUser, created) => {
+                            console.log(data);
                             if (!newUser) {
                                 return done(null, false);
                             }
@@ -49,7 +53,7 @@ module.exports = (passport, user) => {
             }
         )
     );
-    
+
     //LOCAL SIGNIN
     passport.use(
         'local-login',
@@ -66,13 +70,13 @@ module.exports = (passport, user) => {
                     return bCrypt.compareSync(password, userpass);
                 };
 
-                db.users.findOne({
+                db.Users.findOne({
                         where: {
                             email: email
                         }
                     })
-                    .then(users => {
-                        if (!users) {
+                    .then(Users => {
+                        if (!Users) {
                             return done(null, false, {
                                 message: 'Email does not exist'
                             });
@@ -84,7 +88,7 @@ module.exports = (passport, user) => {
                             });
                         }
 
-                        var userinfo = user.get();
+                        var userinfo = users.get();
 
                         return done(null, userinfo);
                     })
@@ -99,7 +103,7 @@ module.exports = (passport, user) => {
         )
     );
 
-    passport.serializeUser(function(user, cb) {
+    passport.serializeUser(function(users, cb) {
         cb(null, obj);
     });
     

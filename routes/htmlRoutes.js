@@ -11,12 +11,12 @@
 module.exports = function(app) {
 
   // if does not have account send to signup page
-  app.get("/", function(req, res){
-    if (!req.User) {
-      res.render("/signup");
-    }
-    res.render("../views/login.handlebars");
-  });
+  // app.get("/", function(req, res){
+  //   if (!req.User) {
+  //     res.render("/signup");
+  //   }
+  //   res.render("../views/login.handlebars");
+  // });
 
   app.get("/signup", function(req, res) {
     res.render("../views/signup.handlebars");
