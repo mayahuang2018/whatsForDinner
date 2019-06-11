@@ -1,9 +1,8 @@
 module.exports = (passport, user) => {
     const bc = require("bcryptjs");
-    // const passport = require("passport");
     const LocalStrategy = require("passport-local").Strategy;
-    const User = user;
-
+    // const User = user;
+    const db = require("../models");
 
     passport.use(
         'local-signup',
@@ -18,12 +17,12 @@ module.exports = (passport, user) => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
                 };
 
-                User.findOne({
+                db.users.findOne({
                     where: {
                         email: email
                     }
-                }).then(user => {
-                    if (user) {
+                }).then(users => {
+                    if (users) {
                         return done(null, false, {
                             message: 'That email is already taken'
                         });
@@ -36,7 +35,7 @@ module.exports = (passport, user) => {
                             lastname: req.body.lastname
                         };
 
-                        User.create(data).then((newUser, created) => {
+                        db.users.create(data).then((newUser, created) => {
                             if (!newUser) {
                                 return done(null, false);
                             }
@@ -50,10 +49,10 @@ module.exports = (passport, user) => {
             }
         )
     );
-
+    
     //LOCAL SIGNIN
     passport.use(
-        'local-signin',
+        'local-login',
         new LocalStrategy({
                 // by default, local strategy uses username and password, we will override with email
                 usernameField: 'email',
@@ -62,19 +61,18 @@ module.exports = (passport, user) => {
             },
 
             function (req, email, password, done) {
-                var User = user;
 
                 var isValidPassword = (userpass, password) => {
                     return bCrypt.compareSync(password, userpass);
                 };
 
-                User.findOne({
+                db.users.findOne({
                         where: {
                             email: email
                         }
                     })
-                    .then(user => {
-                        if (!user) {
+                    .then(users => {
+                        if (!users) {
                             return done(null, false, {
                                 message: 'Email does not exist'
                             });
