@@ -5,7 +5,7 @@ var exphbs = require("express-handlebars");
 var db = require("./models");
 
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3309;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -44,4 +44,4 @@ db.sequelize.sync(syncOptions).then(function() {
   });
 });
 
-module.exports = app;
+// module.exports = app;
