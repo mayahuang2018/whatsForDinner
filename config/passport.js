@@ -6,7 +6,7 @@ module.exports = (passport, users) => {
 const LocalStrategy = require("passport-local").Strategy;
 const bc = require("bcryptjs");
 const db = require("../models");
-const Users = require("../models/users")
+const User = require("../models/users");
         
     passport.use(
         'local-signup',
@@ -19,12 +19,12 @@ const Users = require("../models/users")
                     return bc.hashSync(password, bc.genSaltSync(8), null);
                 };
 
-                db.Users.findOne({
+                db.User.findOne({
                     where: {
                         email: email
                     }
-                }).then(Users => {
-                    if (Users) {
+                }).then(User => {
+                    if (User) {
                         return done(null, false, {
                             message: 'That username is already taken'
                         });
@@ -38,7 +38,7 @@ const Users = require("../models/users")
                             lastname: req.body.lastname
                         };
 
-                        db.Users.create(data).then((newUser, created) => {
+                        db.User.create(data).then((newUser, created) => {
                             console.log(data);
                             if (!newUser) {
                                 return done(null, false);
@@ -70,13 +70,13 @@ const Users = require("../models/users")
                     return bCrypt.compareSync(password, userpass);
                 };
 
-                db.Users.findOne({
+                db.User.findOne({
                         where: {
                             email: email
                         }
                     })
-                    .then(Users => {
-                        if (!Users) {
+                    .then(User => {
+                        if (!User) {
                             return done(null, false, {
                                 message: 'Email does not exist'
                             });
