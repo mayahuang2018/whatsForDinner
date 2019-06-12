@@ -45,9 +45,17 @@ input[type=submit] {
 
 }
 
-#loginForm,#createAccount{
+#loginForm{
   position: fixed;
   left: 30%;
   right: 30%;
   top: 23%
+}
+
+#createAccount{
+  position: fixed;
+  left: 30%;
+  right: 30%;
+  top: 3%
+
 }
