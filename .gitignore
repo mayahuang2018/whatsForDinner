@@ -2,3 +2,10 @@
 node_modules
 npm-debug.log
 .env
+
+data
+
+client-docker-compose.yml
+docker-compose.yml
+mysql-connect.sh
+
