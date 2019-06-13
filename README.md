@@ -21,9 +21,7 @@ An app to help the user decide what to make for dinner based off what they have 
 
 # APIs to be Used
 
-* http://api2.bigoven.com/
-* bigoven.com
-* food2fork.com
+* RecipePuppy: http://www.recipepuppy.com/about/api/
 
 
 # Rough Breakdown of Tasks
