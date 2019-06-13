@@ -2,7 +2,7 @@ const db = require("../models");
 
 module.exports = function(app) {
 // Get all examples
-app.get("/api/favoriterecipes", function (req, res) {
+app.get("/api/results", function (req, res) {
     db.Dinner.findAll({}).then(function (dbDinner) {
         res.json(dbDinner);
     });

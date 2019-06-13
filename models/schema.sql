@@ -15,4 +15,5 @@ CREATE TABLE dinner
     PRIMARY KEY (id)
 );
 
+
 INSERT INTO dinner (username) VALUES ('hilarytest');
