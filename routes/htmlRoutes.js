@@ -18,8 +18,8 @@ module.exports = function(app) {
   //   res.render("../views/login.handlebars");
   // });
 
-  app.get("/signup", function(req, res) {
-    res.render("../views/signup.handlebars");
+  app.get("/results", function(req, res) {
+    res.render("../views/layouts/results.handlebars");
   })
 
   app.get("/login", function(req, res){
