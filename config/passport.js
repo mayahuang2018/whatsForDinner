@@ -1,33 +1,32 @@
-// const mysql = require("mysql2");
-
-
-module.exports = (passport, users) => {
-
+const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bc = require("bcryptjs");
 const db = require("../models");
-const User = require("../models/users");
-        
+// const flash = require("connect-flash");
+
+ module.exports = (passport) => {
     passport.use(
         'local-signup',
         new LocalStrategy({
                 usernameField: 'username',
+                passReqToCallback: true
             },
 
-            function (req, username, password, done) {
+            (req, username, password, done) => {
                 const generateHash = password => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
                 };
 
                 db.User.findOne({
                     where: {
-                        email: email
+                        username: req.body.username
                     }
-                }).then(User => {
-                    if (User) {
-                        return done(null, false, {
-                            message: 'That username is already taken'
-                        });
+                }).then((user, err) => {
+                    if (user) {
+                        // return done(null, false, {
+                        //     message: 'That email is already taken'
+                        // });
+                    return done(null, false, {message: "That username is already taken."})
                     } else {
                         const userPassword = generateHash(password);
                         const data = {
@@ -45,7 +44,7 @@ const User = require("../models/users");
                             }
 
                             if (newUser) {
-                                return done(null, newUser);
+                                return done(newUser, console.log("created new user"));
                             }
                         });
                     }
@@ -64,31 +63,26 @@ const User = require("../models/users");
                 passReqToCallback: true // allows us to pass back the entire request to the callback
             },
 
-            function (req, email, password, done) {
+            (req, email, password, done) => {
 
-                var isValidPassword = (userpass, password) => {
+                const isValidPassword = (userpass, password) => {
                     return bCrypt.compareSync(password, userpass);
                 };
 
                 db.User.findOne({
                         where: {
-                            email: email
+                            username: req.body.username
                         }
                     })
-                    .then(User => {
-                        if (!User) {
-                            return done(null, false, {
-                                message: 'Email does not exist'
-                            });
-                        }
+                    .then((user, err, flash) => {
+                        if (!user) {
+                            return done(null, false, {message: "That username is already taken."});
+                        };
+                        if (!isValidPassword(users.password, password)) {
+                            return done(null, false, {message: "Oops, wrong password!"});
+                        };
 
-                        if (!isValidPassword(user.password, password)) {
-                            return done(null, false, {
-                                message: 'Incorrect password.'
-                            });
-                        }
-
-                        var userinfo = users.get();
+                        const userinfo = users.get();
 
                         return done(null, userinfo);
                     })
@@ -104,10 +98,11 @@ const User = require("../models/users");
     );
 
     passport.serializeUser(function(users, cb) {
-        cb(null, obj);
+        cb(null, user.id);
     });
     
     passport.deserializeUser(function(obj, cb){
         cd(null, obj);
     });
-};
+
+ }

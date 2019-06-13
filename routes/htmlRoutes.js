@@ -4,25 +4,33 @@
 
 // Dependencies
 // =============================================================
-// var path = require("path");
+var path = require("path");
+
 
 // Routes
 // =============================================================
 module.exports = function(app) {
 
   // if does not have account send to signup page
-  // app.get("/", function(req, res){
-  //   if (!req.User) {
-  //     res.render("/signup");
-  //   }
-  //   res.render("../views/login.handlebars");
-  // });
+  app.get("/", function(req,res){
+    if(req.isAuthenticated()){
+        var user = {
+            id: req.session.passport.user,
+            isloggedin: req.isAuthenticated()
+        }
+        res.render("index", user);
+    }
+    else{
+        res.render("login");
+    }
+    
+})
 
-  app.get("/signup", function(req, res) {
+  app.get("/signup", (req, res) => {
     res.render("../views/signup.handlebars");
   })
 
-  app.get("/login", function(req, res){
+  app.get("/login", (req, res) => {
     if (req.User) {
       res.redirect("/index")
     }
@@ -31,17 +39,17 @@ module.exports = function(app) {
 
 
   // 404 route loads 404.handlebars
-  app.get("/404", function(req, res) {
+  app.get("/404", (req, res) => {
     res.render("../views/404.handlebars");
   });
 
    // recipies search route
-   app.get("/showMatches", function(req, res) {
+   app.get("/showMatches", (req, res) => {
     res.render("../views/showMatches.handlebars");
   });
 
    // recipies search route
-   app.get("/showShopList", function(req, res) {
+   app.get("/showShopList", (req, res) => {
     res.render("../views/showShopList.handlebars");
   });
 

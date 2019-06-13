@@ -1,8 +1,16 @@
+const express = require("express");
+const passport = require("passport");
 
 module.exports = (app, passport) => {
-    const express = require("express");
-    var passport = require("passport");
-
+    
+    app.post("/users", 
+    passport.authenticate("local-signup", {
+        successRedirect: "/login",
+        failureRedirect: "/login",
+        // failureFlash: true
+    })
+);
+    
     app.get("/", (req, res) => {
         res.render("index");
     });
@@ -11,13 +19,7 @@ module.exports = (app, passport) => {
         res.render("signup");
     });
 
-    app.post("/signup", 
-        passport.authenticate("local-signup", {
-            successRedirect: "/login",
-            failureRedirect: "/login",
-            // failureFlash: true
-        })
-    );
+    
 
     app.get("/index", isLoggedIn, (req, res) => {
         res.render("index")

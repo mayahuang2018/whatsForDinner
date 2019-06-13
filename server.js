@@ -5,15 +5,12 @@ const app = express();
 const exphbs = require("express-handlebars");
 const passport = require("passport");
 const session = require("express-session");
+// const flash = require("connect-flash");
 const bc = require("bcryptjs");
-const db = require("./models");
-const PORT = process.env.PORT || 6258;
+const PORT = process.env.PORT || 8769;
 const path = require("path");
+const db = require("./models");
 
-// Routes
-require("./routes/htmlRoutes")(app);
-require("./routes/passportRoutes")(app)
-require("./config/passport.js")(passport, db.user);
 
 
 // Middleware
@@ -23,16 +20,21 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.use(express.static("public"));
 
-const localStrategyRoute = require("./routes/passportRoutes")(app, passport);
-
-require("./config/passport")(passport)
-
 // passport
+require("./config/passport.js")(passport);
+
 app.use(
   session({ secret: "blahblahblah", resave: true, saveUninitialized: true })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use(flash);
+// app.use(bc());
+
+
+// Routes
+require("./routes/htmlRoutes")(app);
+require("./routes/passportRoutes")(app, passport);
 
 
 const viewsPath = path.join(__dirname, 'views');
@@ -46,12 +48,10 @@ app.engine(
   exphbs({
     defaultLayout: "main",
     layoutsDir: layoutsPath,
-    partialsDir: [partialsPath],
+    partialsDir: partialsPath,
   })
 );
 app.set("view engine", "handlebars");
-
-
 
 var syncOptions = {
   force: false
