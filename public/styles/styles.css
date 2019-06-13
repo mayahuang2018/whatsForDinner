@@ -57,5 +57,13 @@ input[type=submit] {
   left: 30%;
   right: 30%;
   top: 3%
-
 }
+
+#playlist_add_check{
+  color: rgb(28, 110, 97);
+  position: fixed;
+  left:20%;
+  right:20%;
+  top:30%
+}
+
