@@ -7,7 +7,7 @@ const passport = require("passport");
 const session = require("express-session");
 // const flash = require("connect-flash");
 const bc = require("bcryptjs");
-const PORT = process.env.PORT || 3506;
+const PORT = process.env.PORT || 3874;
 const path = require("path");
 const db = require("./models");
 
@@ -28,9 +28,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(flash);
-// app.use(bc());
-
 
 // Routes
 require("./routes/htmlRoutes")(app);

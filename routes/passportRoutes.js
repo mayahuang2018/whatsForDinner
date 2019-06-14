@@ -14,14 +14,12 @@ module.exports = (app, passport) => {
     app.post("/signup", 
     passport.authenticate("local-signup", {
         successRedirect: "/login",
-        failureRedirect: "/login",
+        failureRedirect: "/signup",
         // failureFlash: true
     })
 );
     
-    app.get("/index", isLoggedIn, (req, res) => {
-        res.render("index")
-    });
+    
 
     // app.get("/logout", (res, res) => {
     //     req.session.destroy(err => {
@@ -38,9 +36,13 @@ module.exports = (app, passport) => {
         })
     );
 
+    app.get("/index", isLoggedIn, (req, res) => {
+        res.render("index")
+    });
+    
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) return next();
-        res.redirect("/login")
+        res.redirect("/index")
     }
 
 };

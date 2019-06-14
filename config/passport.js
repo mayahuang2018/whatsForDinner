@@ -1,32 +1,26 @@
-
-// const Sequelize = require("sequelize");
-// const DataTypes = sequelize.DataTypes;
-// let sequelize = new Sequelize(...);
-
-// const passport = require("passport");
-// const LocalStrategy = require("passport-local").Strategy;
 const bc = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
 const db = require("../models");
-// const flash = require("connect-flash");
 
- module.exports = function(passport, user) {
-    
-    passport.serializeUser(function(users, cb) {
+module.exports = function (passport, user) {
+
+    // serialize and deserialize User
+    passport.serializeUser(function (users, cb) {
         cb(null, user.id);
     });
-    
-    passport.deserializeUser(function(obj, cb){
+
+    passport.deserializeUser(function (obj, cb) {
         cd(null, obj);
     });
 
+    // local signup strategy -- password, search database to see if user already exists, and if not then add a user
     passport.use(
         'local-signup',
         new LocalStrategy({
                 usernameField: 'username',
                 // passReqToCallback: true
             },
-            
+
             function (username, password, done) {
                 const generateHash = password => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
@@ -36,9 +30,14 @@ const db = require("../models");
                     where: {
                         username: username
                     }
-                }), (function(username, err) {
-                    if (err) {return done(err);}
-                    if (user) {return done(null, false, {message: "That username is already taken."})
+                }), (function (username, err) {
+                    if (err) {
+                        return done(err);
+                    }
+                    if (user) {
+                        return done(null, false, {
+                            message: "That username is already taken."
+                        })
                     } else {
                         const userPassword = generateHash(password);
                         const data = {
@@ -49,14 +48,14 @@ const db = require("../models");
                             lastname: req.body.lastname
                         };
 
-                        db.create(data).then(function(newUser) {
+                        db.create(data).then(function (newUser) {
                             console.log(data);
                             if (!newUser) {
                                 return done(null, false);
                             }
 
                             if (newUser) {
-                                return done(newUser, console.log("created new user"));
+                                return done(newUser, console.log(newUser, "created new user"));
                             }
                         });
                     }
@@ -65,7 +64,7 @@ const db = require("../models");
         )
     );
 
-    //LOCAL SIGNIN
+    //local login - check to see is a user, give error hints. If user, log in, and if not send to signup page.
     passport.use(
         'local-login',
         new LocalStrategy({
@@ -75,9 +74,9 @@ const db = require("../models");
                 passReqToCallback: true // allows us to pass back the entire request to the callback
             },
 
-            function(req, email, password, done) {
+            function (req, email, password, done) {
 
-                const isValidPassword = function(userpass, password) {
+                const isValidPassword = function (userpass, password) {
                     return bCrypt.compareSync(password, userpass);
                 };
 
@@ -85,19 +84,23 @@ const db = require("../models");
                         where: {
                             username: req.body.username
                         }
-                    }), (function(user, err, flash) {
+                    }), (function (user, err, flash) {
                         if (!user) {
-                            return done(null, false, {message: "That username is already taken."});
+                            return done(null, false, {
+                                message: "That username is already taken."
+                            });
                         };
                         if (!isValidPassword(users.password, password)) {
-                            return done(null, false, {message: "Oops, wrong password!"});
+                            return done(null, false, {
+                                message: "Oops, wrong password!"
+                            });
                         };
 
                         const userinfo = users.get();
 
                         return done(null, userinfo);
                     })
-                    .catch(function(err) {
+                    .catch(function (err) {
                         console.log('Error:', err);
 
                         return done(null, false, {
@@ -108,6 +111,4 @@ const db = require("../models");
         )
     );
 
-   
-
- }
+}
