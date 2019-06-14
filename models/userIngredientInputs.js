@@ -1,35 +1,34 @@
 module.exports = (sequelize, DataTypes) => {
     var userIngredients = sequelize.define('userIngredients', {
         
-        id: {
-            autoIncrement: true,
-            primaryKey: true,
-            type: DataTypes.INTEGER
-        },
+        // id: {
+        //     type: DataTypes.INTEGER
+        // },
 
         ingredient1: {
             type: DataTypes.STRING,
-            notEmpty: true
+            allowNull: false,
         },
         ingredient2: {
             type: DataTypes.STRING,
-            notEmpty: false
+            allowNull: false,
         },
         ingredient3: {
             type: DataTypes.STRING,
-            notEmpty: false
+            allowNull: false,
         },
         ingredient4: {
             type: DataTypes.STRING,
-            notEmpty: false
+            allowNull: false,
         },
         ingredient5: {
             type: DataTypes.STRING,
-            notEmpty: false
+            allowNull: false,
         },
 
         addToList: {
-            type: DataTypes.Boolean, 
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
 
     });

@@ -1,8 +1,8 @@
 function recipes(ingredients) {
 
-    var ingredients = $("#search").val();
-
-    var queryURL = "http://www.recipepuppy.com/api/?i=" + ingredients + "p=5"
+    // var ingredients = $("#search").val();
+console.log('get recipes')
+    var queryURL = "http://www.recipepuppy.com/api/?i=" + ingredients + "&p=5"
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -24,12 +24,12 @@ function recipes(ingredients) {
   }
 
   //  //need to swap out the eyeglass icon image
-  $("#search").on("click", function(event) {
+  $(document).on("click", '#search',function(event) {
     // Preventing the button from trying to submit the form
     event.preventDefault();
     // Storing the recipe name
     var inputRecipe = $("#recipe-input").val().trim();
-
+    console.log(inputRecipe)
     // Running the function(passing in the recipe as an argument)
     recipes(inputRecipe);
   });
