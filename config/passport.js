@@ -1,32 +1,44 @@
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+
+// const Sequelize = require("sequelize");
+// const DataTypes = sequelize.DataTypes;
+// let sequelize = new Sequelize(...);
+
+// const passport = require("passport");
+// const LocalStrategy = require("passport-local").Strategy;
 const bc = require("bcryptjs");
+const LocalStrategy = require("passport-local").Strategy;
 const db = require("../models");
 // const flash = require("connect-flash");
 
- module.exports = (passport) => {
+ module.exports = function(passport, user) {
+    
+    passport.serializeUser(function(users, cb) {
+        cb(null, user.id);
+    });
+    
+    passport.deserializeUser(function(obj, cb){
+        cd(null, obj);
+    });
+
     passport.use(
         'local-signup',
         new LocalStrategy({
                 usernameField: 'username',
-                passReqToCallback: true
+                // passReqToCallback: true
             },
-
-            (req, username, password, done) => {
+            
+            function (username, password, done) {
                 const generateHash = password => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
                 };
 
-                db.User.findOne({
+                db.user.findOne({
                     where: {
-                        username: req.body.username
+                        username: username
                     }
-                }).then((user, err) => {
-                    if (user) {
-                        // return done(null, false, {
-                        //     message: 'That email is already taken'
-                        // });
-                    return done(null, false, {message: "That username is already taken."})
+                }), (function(username, err) {
+                    if (err) {return done(err);}
+                    if (user) {return done(null, false, {message: "That username is already taken."})
                     } else {
                         const userPassword = generateHash(password);
                         const data = {
@@ -37,7 +49,7 @@ const db = require("../models");
                             lastname: req.body.lastname
                         };
 
-                        db.User.create(data).then((newUser, created) => {
+                        db.create(data).then(function(newUser) {
                             console.log(data);
                             if (!newUser) {
                                 return done(null, false);
@@ -63,18 +75,17 @@ const db = require("../models");
                 passReqToCallback: true // allows us to pass back the entire request to the callback
             },
 
-            (req, email, password, done) => {
+            function(req, email, password, done) {
 
-                const isValidPassword = (userpass, password) => {
+                const isValidPassword = function(userpass, password) {
                     return bCrypt.compareSync(password, userpass);
                 };
 
-                db.User.findOne({
+                db.user.findOne({
                         where: {
                             username: req.body.username
                         }
-                    })
-                    .then((user, err, flash) => {
+                    }), (function(user, err, flash) {
                         if (!user) {
                             return done(null, false, {message: "That username is already taken."});
                         };
@@ -86,23 +97,17 @@ const db = require("../models");
 
                         return done(null, userinfo);
                     })
-                    .catch(err => {
+                    .catch(function(err) {
                         console.log('Error:', err);
 
                         return done(null, false, {
-                            message: 'Something went wrong with your Signin'
+                            message: 'Something went wrong with your Login'
                         });
                     });
             }
         )
     );
 
-    passport.serializeUser(function(users, cb) {
-        cb(null, user.id);
-    });
-    
-    passport.deserializeUser(function(obj, cb){
-        cd(null, obj);
-    });
+   
 
  }

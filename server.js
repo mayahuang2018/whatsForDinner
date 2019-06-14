@@ -7,7 +7,7 @@ const passport = require("passport");
 const session = require("express-session");
 // const flash = require("connect-flash");
 const bc = require("bcryptjs");
-const PORT = process.env.PORT || 8769;
+const PORT = process.env.PORT || 3506;
 const path = require("path");
 const db = require("./models");
 
