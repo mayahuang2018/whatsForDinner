@@ -9,6 +9,7 @@ const bc = require("bcryptjs");
 const db = require("./models");
 const PORT = process.env.PORT || 6258;
 const path = require("path");
+const cors = require("cors")
 
 // Routes
 require("./routes/htmlRoutes")(app);

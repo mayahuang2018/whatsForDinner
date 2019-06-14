@@ -44,5 +44,5 @@ module.exports = function(app) {
    app.get("/showShopList", function(req, res) {
     res.render("../views/showShopList.handlebars");
   });
-
 };
+

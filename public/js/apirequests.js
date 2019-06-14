@@ -1,35 +1,42 @@
 function recipes(ingredients) {
 
-    var ingredients = $("#search").val();
+  // var ingredients = $("#search").val();
+  console.log('get recipes')
+  var queryURL = "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=" + ingredients + "&p=5"
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+    dataType: 'json'
+  })
+  .then(function (response) {
+    console.log('hello')
+    // Printing the entire object to console
+    console.log(response.results);
 
-    var queryURL = "http://www.recipepuppy.com/api/?i=" + ingredients + "p=5"
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function(response) {
+    response.results.map(function(ele) {console.log(ele.title)});
+    response.results.map(function(ele) {console.log(ele.href)});
+    response.results.map(function(ele) {console.log(ele.ingredients)})
 
-      // Printing the entire object to console
-      console.log(response);
 
-      // Constructing HTML containing the recipe information
-      var recipeName = $("<h1>").text(response.title);
-      var recipeLink = $("<a>").attr("href", response.href);
-      var recipeImage = $("<img>").attr("src", response.thumbnail);
-      var recipeIngredients = $("<h2>").text(response.ingredients);
+    // Constructing HTML containing the recipe information
+    // var recipeName = $("<h1>").text(response.title);
+    // var recipeLink = $("<a>").attr("href", response.href);
+    // var recipeImage = $("<img>").attr("src", response.thumbnail);
+    // var recipeIngredients = $("<h2>").text(response.ingredients);
 
-      // append the new recipe content
-   
-      $("#recipe-div").append(recipeName, recipeLink, recipeImage, recipeIngredients);
-    });
-  }
+    // append the new recipe content
 
-  //  //need to swap out the eyeglass icon image
-  $("#search").on("click", function(event) {
-    // Preventing the button from trying to submit the form
-    event.preventDefault();
-    // Storing the recipe name
-    var inputRecipe = $("#recipe-input").val().trim();
+    $("#recipe-div").append(recipeName, recipeLink, recipeImage, recipeIngredients);
+  })
+}
 
-    // Running the function(passing in the recipe as an argument)
-    recipes(inputRecipe);
-  });
+//  //need to swap out the eyeglass icon image
+$(document).on("click", '#search', function (event) {
+  // Preventing the button from trying to submit the form
+  event.preventDefault();
+  // Storing the recipe name
+  var inputRecipe = $("#recipe-input").val().trim();
+  console.log(inputRecipe)
+  // Running the function(passing in the recipe as an argument)
+  recipes(inputRecipe);
+});
