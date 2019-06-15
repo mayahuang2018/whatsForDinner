@@ -6,11 +6,12 @@ function recipes(ingredients) {
 
   // var ingredients = $("#search").val();
   // console.log('get recipes')
-  var queryURL = "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=" + ingredients + "&p=5";
+  var queryURL = "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=" + ingredients + "&p=3";
   $.ajax({
     url: queryURL,
     method: "GET",
-    dataType: 'json'
+    dataType: 'json',
+    data: {limit: 1}
   })
     .then(function (response) {
       // Printing the entire object to console
@@ -45,9 +46,27 @@ function recipes(ingredients) {
       //   return results.thumbnail;
       // });
 
-      
+    // for (let i=0; i<data.length; i++){
+    //   if (data[i] <= 5)
+    //   break;
+    //   console.log(data[i]);
+    //   console.log(data);
+    //   $(".search-results").append(`
+    //     <div class="row">
+    //       <div class="col md3">${data.title}</div>
+    //       <div class="col md3">${data.href}</div>
+    //       <div class="col md3"><img src="${data.thumbnail}"></div>
+    //       <div class="col md3">${data.ingredients}</div>
+    //     </div>
+    //     `)
+    // }
+
+
+
       results.forEach(data => {
-          console.log('Result here',data)
+          console.log('Result here',data);
+          if (data <= 3)
+          return;
           $(".search-results").append(`
           <div class="row">
             <div class="col md3">${data.title}</div>
@@ -56,6 +75,8 @@ function recipes(ingredients) {
             <div class="col md3">${data.ingredients}</div>
           </div>
           `)  
+
+    
       })
 
      
