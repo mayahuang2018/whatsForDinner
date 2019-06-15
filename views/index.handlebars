@@ -1,19 +1,26 @@
 <nav class="N/A transparent z-depth-5 nav-extended">
-  <div class="nav-wrapper">
-    <a href="/" class="brand-logo">What's for dinner?</a>
-    <ul id="nav-mobile" class="right">
-      <li><a href="/example/:id"> <i class="material-icons">account_circle</i></a></li>
-      <li><a href="/create"> <i class="material-icons">add_box</i></a></li>
-    </ul>
-  </div>
-</nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">What's for dinner?</a>
+      <ul id="nav-mobile" class="right">
+        <li><a href="/example/:id"> <i class="material-icons">account_circle</i></a></li>
+        <li><a href="/create"> <i class="material-icons">add_box</i></a></li>
+      </ul>
+    </div>
+  </nav> 
 
-<div class="row z-depth-5" id="searchInput">
-  <div class="input-field col s11">
-    <div class="search-wrapper">
-      <h5 class="#90a4ae blue-grey-text text-lighten-2">{{msg}}</h5>
-      <input id="recipe-input" placeholder="Search">
-      <button id='search' class="btn-floating #90a4ae blue-grey lighten-2"><i class="material-icons">search</i></button>
+  <div class="row z-depth-5" id="searchInput">
+        <div id="listings" class="input-field col s12">
+          <div class="search-wrapper">
+            <h5 class="#90a4ae blue-grey-text text-lighten-2">{{msg}}</h5>
+            <input id="recipe-input" placeholder="Search">
+            <button id='search' class="btn-floating #90a4ae blue-grey lighten-2"><i class="material-icons">search</i></button>
+<p></p>
+<div class="search-results">
+</div>
+       
+       </div>
+   </div>
+</div>
 
       <div class="search-results">
         {{!-- <div class="row">
@@ -23,32 +30,3 @@
           <div class="col md3">Eggs, Flour, %2 milk</div>
         </div> --}}
       </div>
-
-    </div>
-    {{!-- 
- <div id="loginForm">
-      <div class="card z-depth-5"> 
-        <div class="card-content #424242 grey-text text-darken-3">
-          <span class="card-title">Welcome...</span>
-           <p>
-           Log into your personal receipe box
-          <p>
-            <br>
-           <form id="logIn" action="/login" method="post">
-            <div>
-             <label>Username:</label>
-            <input type="text" name="username"/>
-            </div>
-            <div>
-             <label>Password:</label>
-             <input type="password" name="password"/>
-            </div>
-            <div>
-              <input type="submit" value="Log In"/>
-            </div>
-          </form>  
-          <br>
-          <p>Don't have a account? <a href="/">Create one</a></p>      
-        </div>       
-      </div>
-    </div> --}}
