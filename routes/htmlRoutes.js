@@ -73,7 +73,7 @@ app.get("/add", (req, res) => {
       id: req.session.passport.user,
       isloggedin: req.isAuthenticated()
     };
-    res.render("../views/layouts/.handlebars", user);
+    res.render("../views/layouts/add.handlebars", user);
   } else {
     res.render("login");
   }
