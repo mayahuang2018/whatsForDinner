@@ -1,68 +1,49 @@
 const bc = require("bcryptjs");
+const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const db = require("../models");
 
-module.exports = function (passport, user) {
+module.exports = function (passport) {
 
-    // serialize and deserialize User
-    passport.serializeUser(function (users, cb) {
-        cb(null, user.id);
-    });
-
-    passport.deserializeUser(function (obj, cb) {
-        cd(null, obj);
-    });
+    
 
     // local signup strategy -- password, search database to see if user already exists, and if not then add a user
     passport.use(
         'local-signup',
         new LocalStrategy({
                 usernameField: 'username',
-                // passReqToCallback: true
+                passReqToCallback: true
             },
 
-            function (username, password, done) {
+            function (req, username, password, done) {
                 const generateHash = password => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
                 };
 
-                db.user.findOne({
-                    where: {
-                        username: username
-                    }
-                }), (function (username, err) {
-                    if (err) {
-                        return done(err);
-                    }
-                    if (user) {
-                        return done(null, false, {
-                            message: "That username is already taken."
-                        })
-                    } else {
-                        const userPassword = generateHash(password);
-                        const data = {
-                            username: username,
-                            email: req.body.email,
-                            password: userPassword,
-                            firstname: req.body.firstname,
-                            lastname: req.body.lastname
-                        };
+                const userPassword = generateHash(password);
+                console.log(userPassword);
+                const data = {
+                    username: username,
+                    email: req.body.email,
+                    password: userPassword,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname
+                }
 
-                        db.create(data).then(function (newUser) {
-                            console.log(data);
-                            if (!newUser) {
-                                return done(null, false);
-                            }
+                db.user.create(data)           
+                .then(newUser => {
+                    // console.log(newUser);
+                    if (!newUser) {
+                        return done(null, false);
+                    }
 
-                            if (newUser) {
-                                return done(newUser, console.log(newUser, "created new user"));
-                            }
-                        });
+                    if (newUser) {
+                        return done(console.log("created new user ${newUser.username}"));
                     }
                 });
-            }
-        )
+            })
     );
+
 
     //local login - check to see is a user, give error hints. If user, log in, and if not send to signup page.
     passport.use(
@@ -74,7 +55,7 @@ module.exports = function (passport, user) {
                 passReqToCallback: true // allows us to pass back the entire request to the callback
             },
 
-            function (req, email, password, done) {
+            function (req, password, done) {
 
                 const isValidPassword = function (userpass, password) {
                     return bCrypt.compareSync(password, userpass);
@@ -84,7 +65,7 @@ module.exports = function (passport, user) {
                         where: {
                             username: req.body.username
                         }
-                    }), (function (user, err, flash) {
+                    }), (function (user) {
                         if (!user) {
                             return done(null, false, {
                                 message: "That username is already taken."
@@ -111,4 +92,13 @@ module.exports = function (passport, user) {
         )
     );
 
+
+    // serialize and deserialize User
+    passport.serializeUser(function (user, cb) {
+        cb(null, user.id);
+    });
+
+    passport.deserializeUser(function (user, cb) {
+        cb(null, user);
+    });
 }

@@ -1,8 +1,8 @@
-// const express = require("express");
-// const passport = require("passport");
+const passport = require("passport");
 
 module.exports = (app, passport) => {
     
+
     app.get("*", (req, res) => {
         res.render("index");
     });
@@ -11,15 +11,13 @@ module.exports = (app, passport) => {
         res.render("signup");
     });
 
-    app.post("/signup", 
-    passport.authenticate("local-signup", {
-        successRedirect: "/login",
-        failureRedirect: "/signup",
-        // failureFlash: true
-    })
-);
-    
-    
+    app.post("/signup",
+        passport.authenticate("local-signup", {
+            successRedirect: "/login",
+            failureRedirect: "/signup",
+            // failureFlash: true
+        })
+    );
 
     // app.get("/logout", (res, res) => {
     //     req.session.destroy(err => {
@@ -29,7 +27,7 @@ module.exports = (app, passport) => {
 
     app.post(
         "/login",
-        passport.authenticate("local-signin", {
+        passport.authenticate("local-login", {
             successRedirect: "/index",
             failureRedirect: "/login",
             // failureFlash: true
@@ -39,7 +37,7 @@ module.exports = (app, passport) => {
     app.get("/index", isLoggedIn, (req, res) => {
         res.render("index")
     });
-    
+
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) return next();
         res.redirect("/index")
