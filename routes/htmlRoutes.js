@@ -32,7 +32,7 @@ module.exports = app => {
         id: req.session.passport.user,
         isloggedin: req.isAuthenticated()
       };
-      res.render("../views/layouts/results.handlebars", user);
+      res.render("results", user);
     } else {
       res.render("login");
     }
@@ -46,7 +46,7 @@ module.exports = app => {
         id: req.session.passport.user,
         isloggedin: req.isAuthenticated()
       };
-      res.render("../views/search.handlebars", user);
+      res.render("search", user);
     } else {
       res.render("login");
     }
@@ -60,7 +60,7 @@ app.get("/results", (req, res) => {
       id: req.session.passport.user,
       isloggedin: req.isAuthenticated()
     };
-    res.render("../views/layouts/results.handlebars", user);
+    res.render("results", user);
   } else {
     res.render("login");
   }
@@ -73,7 +73,7 @@ app.get("/add", (req, res) => {
       id: req.session.passport.user,
       isloggedin: req.isAuthenticated()
     };
-    res.render("../views/layouts/add.handlebars", user);
+    res.render("add", user);
   } else {
     res.render("login");
   }

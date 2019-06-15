@@ -1,5 +1,5 @@
 // const recipe = require("../models/apiResponse");
-// const db = require("../models");
+const db = require("../models");
 
 
 function recipes(ingredients) {
@@ -35,10 +35,10 @@ function recipes(ingredients) {
       //   return results.href;
       // });
 
-      // var ingredients = results.map(function (ele) {
-      //   console.log(ele.ingredients);
-      //   return results.ingredients;
-      // });
+      var ingredients = results.map(function (ele) {
+        console.log(ele.ingredients);
+        return results.ingredients;
+      });
 
       // var thumbnail = results.map(function (ele) {
       //   console.log(ele.thumbnail);
@@ -58,7 +58,36 @@ function recipes(ingredients) {
           `)  
       })
 
-     
+    //  on click add a recipe to a table apiResponse.js
+    $(document).on("click", "#addRec", function(e) {
+      e.preventDefault();
+
+      db.apiResults.create(data)
+      .then(newRecipe => {
+        if (!newRecipe) {
+          return document(null, false);
+        }
+
+        if(newRecipe) {
+          return document(console.log("added new recipe ${newRecipe.title}"))
+        }
+      });
+
+      db.userIngredientInputs.create(ingredients)
+      .then(newIngredients => {
+        if (!newIngredients) {
+          return document(null, false);
+        }
+
+        if (newIngredients) {
+          return (document(console.log("added new ingredients ${newIngredients.ingredients")))
+        }
+      })
+    })
+
+
+    // now display on a shopping list page 
+
 
       // Constructing HTML containing the recipe information
       // var recipeName = $("<h1>").text(response.title);
