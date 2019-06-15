@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    var apiResults = sequelize.define('aptResults', {
+    var apiResults = sequelize.define('apiResults', {
         
         id: {
             autoIncrement: true,

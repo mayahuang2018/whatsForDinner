@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3874;
 const path = require("path");
 const db = require("./models");
 
-
+console.log("100");
 
 // Middleware
 app.use(express.urlencoded({
@@ -19,6 +19,7 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(express.static("public"));
+console.log("200");
 
 // passport
 require("./config/passport.js")(passport);
@@ -28,6 +29,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+console.log("300");
 
 // Routes
 require("./routes/htmlRoutes")(app);
@@ -49,6 +51,7 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
+console.log("400");
 
 var syncOptions = {
   force: false
@@ -62,6 +65,7 @@ if (process.env.NODE_ENV === "test") {
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function () {
+  console.log("410");
   app.listen(PORT, function () {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
@@ -70,5 +74,6 @@ db.sequelize.sync(syncOptions).then(function () {
     );
   });
 });
+console.log("500");
 
 module.exports = app;
