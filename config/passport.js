@@ -38,7 +38,7 @@ module.exports = function (passport) {
                     }
 
                     if (newUser) {
-                        return done(console.log("created new user ${newUser.username}"));
+                        return done(console.log("created new user"));
                     }
                 });
             })
