@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    var userIngredients = sequelize.define('userIngredients', {
+    var shoppingList = sequelize.define('shoppingList', {
         
         id: {
             autoIncrement: true,
@@ -32,9 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         //     type: DataTypes.BOOLEAN,
         //     defaultValue: false
         // }
-
     });
 
-    return userIngredients;
+    return shoppingList;
 
 }
