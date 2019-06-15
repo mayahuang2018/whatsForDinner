@@ -8,26 +8,68 @@ function recipes(ingredients) {
     method: "GET",
     dataType: 'json'
   })
-  .then(function (response) {
-    console.log('hello')
-    // Printing the entire object to console
-    console.log(response.results);
+    .then(function (response) {
+      // Printing the entire object to console
+      console.log(response.results);
+      var results = response.results;
 
-    response.results.map(function(ele) {console.log(ele.title)});
-    response.results.map(function(ele) {console.log(ele.href)});
-    response.results.map(function(ele) {console.log(ele.ingredients)})
+      // response.results.map(function(ele) {console.log(ele.title)});
+      // response.results.map(function(ele) {console.log(ele.href)});
+      // response.results.map(function(ele) {console.log(ele.ingredients)})
+      
+      // Constructing HTML containing the recipe information
+      // for (let i = 0; i < response.results.length; i++) {
+      // var recipeName = response.results[i].title;
+      // var recipeLink =response.results[i].href;
+      // var recipeImage =  response.results[i].thumbnail;
+      // var recipeIngredients =response.results[i].ingredients;
+      // console.log(response.results[i].title)
 
+      // var recipeDiv = $("<div>");
+      // recipeDiv.attr("class", "card");
+      // var aboutRecipe =  $("<h1>").html(recipeName);
+      // aboutRecipe.attr("class", "card-title activator grey-text text-darken-4");
+      // var image = $("<img>").attr("src", recipeImage).attr("class","activator");
+      // var cardLink = $("<p>").html("<a href="+recipeLink+">Read more</a>");
+      // var cardContent = $("<div>").attr("class","card-content").html("<p>"+response.results[i].ingredients+"<p>");
 
-    // Constructing HTML containing the recipe information
-    // var recipeName = $("<h1>").text(response.title);
-    // var recipeLink = $("<a>").attr("href", response.href);
-    // var recipeImage = $("<img>").attr("src", response.thumbnail);
-    // var recipeIngredients = $("<h2>").text(response.ingredients);
+      // recipeDiv.append(image);
+      // recipeDiv.append(aboutRecipe);
+      // recipeDiv.append(cardContent);
+      // recipeDiv.append(cardLink);
 
-    // append the new recipe content
+      const data = {
+        title: results.title,
+        link: results.href,
+        ingredients: results.ingredients,
+        thumbnail: results.thumbnail
+      };
+      console.log(data);
 
-    $("#recipe-div").append(recipeName, recipeLink, recipeImage, recipeIngredients);
-  })
+      results.forEach(data => {
+        console.log('Result here', data)
+        $(".search-results").append(`
+   <div>
+    <div class="col s12 m5" id="recipeForm">
+      <div class="card z-depth-5">
+        <div class="card-image">
+        <img max-width="100" height="200" src="${data.thumbnail}">
+          <span class="card-title">${data.title}</span>
+          <a class="btn-floating halfway-fab waves-effect waves-light #ef9a9a red lighten-3" id="addRec" ><i class="material-icons">favorite_border</i></a>
+        </div>
+        <div class="card-content">
+          <p>${data.ingredients}</p>
+        </div>
+        <div class="card-action">
+          <a href="${data.href}" target="_blank">Read more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+        `)
+      })
+
+    })
 }
 
 //  //need to swap out the eyeglass icon image

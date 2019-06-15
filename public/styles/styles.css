@@ -37,6 +37,7 @@ input[type=submit] {
 }
 
 #searchInput{
+  align-content: center;
   background-color: rgba(243, 243, 250, 0.795);
   position: absolute;
   left: 10%;
@@ -66,4 +67,9 @@ input[type=submit] {
   right:20%;
   top:30%
 }
+
+
+
+
+
 
