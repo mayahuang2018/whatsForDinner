@@ -1,8 +1,12 @@
+// const recipe = require("../models/apiResponse");
+// const db = require("../models");
+
+
 function recipes(ingredients) {
 
   // var ingredients = $("#search").val();
   // console.log('get recipes')
-  var queryURL = "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=" + ingredients + "&p=5"
+  var queryURL = "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=" + ingredients + "&p=5";
   $.ajax({
     url: queryURL,
     method: "GET",
@@ -13,26 +17,48 @@ function recipes(ingredients) {
       console.log(response.results);
       var results = response.results;
 
-      var title = results.map(function (ele) {
-        console.log(ele.title);
-        return results.title;
-      });
+      // var title = results.map(function (ele) {
+      //   console.log(ele.title);
+      //   return results.title;
+      // });
 
-      var href = results.map(function (ele) {
-        console.log(ele.href);
-        return results.href;
-      });
+      const data = {
+        title: results.title,
+        link: results.href,
+        ingredients: results.ingredients,
+        thumbnail: results.thumbnail
+      };
+      console.log(data);
 
-      var ingredients = results.map(function (ele) {
-        console.log(ele.ingredients);
-        return results.ingredients;
-      });
+      // var href = results.map(function (ele) {
+      //   console.log(ele.href);
+      //   return results.href;
+      // });
 
-      var thumbnail = results.map(function (ele) {
-        console.log(ele.thumbnail);
-        return results.thumbnail;
-      });
+      // var ingredients = results.map(function (ele) {
+      //   console.log(ele.ingredients);
+      //   return results.ingredients;
+      // });
 
+      // var thumbnail = results.map(function (ele) {
+      //   console.log(ele.thumbnail);
+      //   return results.thumbnail;
+      // });
+
+      
+      results.forEach(data => {
+          console.log('Result here',data)
+          $(".search-results").append(`
+          <div class="row">
+            <div class="col md3">${data.title}</div>
+            <div class="col md3">${data.href}</div>
+            <div class="col md3"><img src="${data.thumbnail}"></div>
+            <div class="col md3">${data.ingredients}</div>
+          </div>
+          `)  
+      })
+
+     
 
       // Constructing HTML containing the recipe information
       // var recipeName = $("<h1>").text(response.title);
@@ -45,6 +71,10 @@ function recipes(ingredients) {
       // $("#recipe-div").append(recipeName, recipeLink, recipeImage, recipeIngredients);
     })
 }
+
+
+
+
 
 //need to swap out the eyeglass icon image
 $(document).on("click", '#search', function (event) {
