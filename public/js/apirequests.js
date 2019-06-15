@@ -3,6 +3,7 @@
 
 
 function recipes(ingredients) {
+  $(".search-results").empty();
 
   // var ingredients = $("#search").val();
   // console.log('get recipes')
