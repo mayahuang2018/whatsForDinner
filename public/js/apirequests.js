@@ -18,6 +18,7 @@ function recipes(ingredients) {
       console.log(response.results);
       var results = response.results;
 
+<<<<<<< HEAD
       // response.results.map(function(ele) {console.log(ele.title)});
       // response.results.map(function(ele) {console.log(ele.href)});
       // response.results.map(function(ele) {console.log(ele.ingredients)})
@@ -43,6 +44,8 @@ function recipes(ingredients) {
       // recipeDiv.append(cardContent);
       // recipeDiv.append(cardLink);
 
+=======
+>>>>>>> f01025a118abe56a5cfb454e8f46b62cb9fdb816
       const data = {
         title: results.title,
         link: results.href,
@@ -76,9 +79,6 @@ function recipes(ingredients) {
 
     })
 }
-
-
-
 
 
 //need to swap out the eyeglass icon image
