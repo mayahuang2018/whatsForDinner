@@ -17,32 +17,6 @@ function recipes(ingredients) {
       console.log(response.results);
       var results = response.results;
 
-<<<<<<< HEAD
-      // response.results.map(function(ele) {console.log(ele.title)});
-      // response.results.map(function(ele) {console.log(ele.href)});
-      // response.results.map(function(ele) {console.log(ele.ingredients)})
-      
-      // Constructing HTML containing the recipe information
-      // for (let i = 0; i < response.results.length; i++) {
-      // var recipeName = response.results[i].title;
-      // var recipeLink =response.results[i].href;
-      // var recipeImage =  response.results[i].thumbnail;
-      // var recipeIngredients =response.results[i].ingredients;
-      // console.log(response.results[i].title)
-
-      // var recipeDiv = $("<div>");
-      // recipeDiv.attr("class", "card");
-      // var aboutRecipe =  $("<h1>").html(recipeName);
-      // aboutRecipe.attr("class", "card-title activator grey-text text-darken-4");
-      // var image = $("<img>").attr("src", recipeImage).attr("class","activator");
-      // var cardLink = $("<p>").html("<a href="+recipeLink+">Read more</a>");
-      // var cardContent = $("<div>").attr("class","card-content").html("<p>"+response.results[i].ingredients+"<p>");
-
-      // recipeDiv.append(image);
-      // recipeDiv.append(aboutRecipe);
-      // recipeDiv.append(cardContent);
-      // recipeDiv.append(cardLink);
-
       const data = {
         title: results.title,
         link: results.href,
@@ -74,65 +48,8 @@ function recipes(ingredients) {
         `)
       })
 
-=======
-      // var title = results.map(function (ele) {
-      //   console.log(ele.title);
-      //   return results.title;
-      // });
-
-      const data = {
-        title: results.title,
-        link: results.href,
-        ingredients: results.ingredients,
-        thumbnail: results.thumbnail
-      };
-      console.log(data);
-
-      // var href = results.map(function (ele) {
-      //   console.log(ele.href);
-      //   return results.href;
-      // });
-
-      // var ingredients = results.map(function (ele) {
-      //   console.log(ele.ingredients);
-      //   return results.ingredients;
-      // });
-
-      // var thumbnail = results.map(function (ele) {
-      //   console.log(ele.thumbnail);
-      //   return results.thumbnail;
-      // });
-
-      
-      results.forEach(data => {
-          console.log('Result here',data)
-          $(".search-results").append(`
-          <div class="row">
-            <div class="col md3">${data.title}</div>
-            <div class="col md3">${data.href}</div>
-            <div class="col md3"><img src="${data.thumbnail}"></div>
-            <div class="col md3">${data.ingredients}</div>
-          </div>
-          `)  
-      })
-
-     
-
-      // Constructing HTML containing the recipe information
-      // var recipeName = $("<h1>").text(response.title);
-      // var recipeLink = $("<a>").attr("href", response.href);
-      // var recipeImage = $("<img>").attr("src", response.thumbnail);
-      // var recipeIngredients = $("<h2>").text(response.ingredients);
-
-      // append the new recipe content
-
-      // $("#recipe-div").append(recipeName, recipeLink, recipeImage, recipeIngredients);
->>>>>>> cfe8c58d53b7644e3b15bdcad1cd1309dc81f6a9
     })
 }
-
-
-
 
 
 //need to swap out the eyeglass icon image
