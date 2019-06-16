@@ -6,7 +6,7 @@ const db = require("../models");
 
 module.exports = function (passport) {
 
-// serialize and deserialize the user
+// serialize the user
 passport.serializeUser(function (user, cb) {
     cb(null, user.id);
 });
@@ -48,10 +48,12 @@ passport.deserializeUser(function (user, cb) {
                     .then(newUser => {
                         // console.log(newUser);
                         if (!newUser) {
+                            console.log("notNewUser");
                             return done(null, false);
                         }
 
                         if (newUser) {
+                            console.log("newUser");
                             return done(console.log("created new user"));
                         }
                     });
