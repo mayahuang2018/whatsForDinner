@@ -59,27 +59,48 @@ module.exports = (app) => {
     });
 
   // fav recipes route
-  app.get("/shoppingList", (req, res) => {
-    if (req.isAuthenticated()) {
-      res.render("shoppingList");
-    } else {
-      res.render("index");
-    }
-  });
+//   app.get("/shoppingList", (req, res) => {
+//     if (req.isAuthenticated()) {
+//       res.render("shoppingList");
+//     } else {
+//       res.render("index");
+//     }
+//   });
 
  
+//   // 404 route loads 404.handlebars
+//   app.get("../404", (req, res) => {
+//     res.render("404");
+//   });
+
+//   router.get("/search", isLoggedIn, (req, res) => {
+//     res.render("search")
+//   });
+
+// function isLoggedIn(req, res, next) {
+//     if (req.isAuthenticated()) return next();
+//     res.redirect("/search")
+// };
+
   // 404 route loads 404.handlebars
   app.get("../404", (req, res) => {
     res.render("404");
   });
 
-  app.get("/search", isLoggedIn, (req, res) => {
-    res.render("search")
+  app.get("../signup", (req, res) => {
+    res.render("signup");
   });
 
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect("/search")
-};
+  app.get("../index", (req, res) => {
+    res.render("index");
+  });
+
+  app.get("../search", (req, res) => {
+    res.render("search");
+  });
+  
+  app.get("../shoppingList", (req, res) => {
+    res.render("shoppingList");
+  });
 
 }
