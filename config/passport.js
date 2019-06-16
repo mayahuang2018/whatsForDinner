@@ -5,8 +5,6 @@ const db = require("../models");
 
 module.exports = function (passport) {
 
-    
-
     // local signup strategy -- password, search database to see if user already exists, and if not then add a user
     passport.use(
         'local-signup',
@@ -29,18 +27,19 @@ module.exports = function (passport) {
                     firstname: req.body.firstname,
                     lastname: req.body.lastname
                 }
+                console.log(username);
 
-                db.user.create(data)           
-                .then(newUser => {
-                    // console.log(newUser);
-                    if (!newUser) {
-                        return done(null, false);
-                    }
+                db.user.create(data)
+                    .then(newUser => {
+                        // console.log(newUser);
+                        if (!newUser) {
+                            return done(null, false);
+                        }
 
-                    if (newUser) {
-                        return done(console.log("created new user"));
-                    }
-                });
+                        if (newUser) {
+                            return done(console.log("created new user"));
+                        }
+                    });
             })
     );
 

@@ -1,20 +1,12 @@
+const db = require("../models");
 const passport = require("passport");
 
-module.exports = (app, passport) => {
-    
-
-    app.get("*", (req, res) => {
-        res.render("index");
-    });
-
-    app.get("/signup", (req, res) => {
-        res.render("signup");
-    });
+module.exports = (app) => {
 
     app.post("/signup",
         passport.authenticate("local-signup", {
-            successRedirect: "/views/login",
-            failureRedirect: "/signup",
+            successRedirect: "index",
+            failureRedirect: "signup",
             // failureFlash: true
         })
     );
@@ -26,21 +18,12 @@ module.exports = (app, passport) => {
     // });
 
     app.post(
-        "/login",
+        "/index",
         passport.authenticate("local-login", {
-            successRedirect: "/index",
-            failureRedirect: "/login",
+            successRedirect: "search",
+            failureRedirect: "index",
             // failureFlash: true
         })
     );
-
-    app.get("/index", isLoggedIn, (req, res) => {
-        res.render("index")
-    });
-
-    function isLoggedIn(req, res, next) {
-        if (req.isAuthenticated()) return next();
-        res.redirect("/index")
-    }
 
 };
