@@ -1,31 +1,32 @@
-module.exports = (router, passport) => {
+module.exports = (app, passport) => {
 
     // displays login page
-    router.get("/index", (req, res) => {
+    app.get("/index", (req, res) => {
         res.render("index");
     });
 
     // displays signup page
-    router.get("/signup", (req, res) => {
+    app.get("/signup", (req, res) => {
         res.render("signup")
     });
 
-    // displays login page
-    router.get("/search", (req, res) => {
+    // displays search page
+    app.get("/search", (req, res) => {
         res.render("search")
     });
 
     // sends through local strategy for signup, and if success to search
-    router.post("/signup",
+    app.post("/signup",
         passport.authenticate("local-signup", {
             successRedirect: "/search",
             failureRedirect: "/signup"
             // failureFlash: true
-        })
+        }),
     );
+    console.log("signedup")
 
-    // sends through local strategy for login
-        router.post("/index",
+    // sends through local strategy for login, and if success to search
+        app.post("/index",
             passport.authenticate("local-login", {
                 successRedirect: "/search",
                 failureRedirect: "/index"
@@ -34,11 +35,11 @@ module.exports = (router, passport) => {
         );
         console.log("logged in")
 
-    // router.get("/search", isLoggedIn, (req, res) => {
+    // app.get("/search", isLoggedIn, (req, res) => {
     //     res.render("search")
     // });
 
-    // router.post("/index",
+    // app.post("/index",
     //     passport.authenticate("local-login", (err) => {
     //         if (err) {
     //             res.redirect("/login");
@@ -51,19 +52,15 @@ module.exports = (router, passport) => {
     // );
     // console.log("logged in")
 
-    router.get("/search", isLoggedIn, (req, res) => {
+    app.get("/search", isLoggedIn, (req, res) => {
         res.render("search")
     });
 
-    router.get("/logout", (req, res) => {
+    app.get("/logout", (req, res) => {
         req.session.destroy(err => {
             res.redirect("/index")
         });
     });
-
-
-
-
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {
