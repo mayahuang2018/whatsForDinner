@@ -4,19 +4,20 @@
     "password": "docker",
     "database": "dinner_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port": "3308"
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
+    "password": "docker",
+    "database": "dinner_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": "docker",
+    "database": "dinner_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
