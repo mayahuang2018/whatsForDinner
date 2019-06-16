@@ -50,6 +50,16 @@ module.exports = (app) => {
       } else {
         res.render("index");
       }
+    }); 
+    
+    
+    //    fav recipes route
+    app.get("/shoppingList*", (req, res) => {
+      if (req.isAuthenticated()) {
+        res.render("shoppingList");
+      } else {
+        res.render("index");
+      }
     });
   
    

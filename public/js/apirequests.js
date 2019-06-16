@@ -1,17 +1,29 @@
 // const recipe = require("../models/apiResponse");
 // const db = require("../models");
 
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
+}
+var printTitle = decodeURI(getUrlVars()["title"]);
+var printIngredients = decodeURI(getUrlVars()["ingredients"]);
+
+// console.log(printTitle)
+// console.log(printIngredients)
+
 
 function recipes(ingredients) {
 
   // var ingredients = $("#search").val();
   // console.log('get recipes')
-  var queryURL = "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=" + ingredients + "&p=3";
+  var queryURL = "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=" + ingredients + "&p=5";
   $.ajax({
     url: queryURL,
     method: "GET",
-    dataType: 'json',
-    data: {limit: 1}
+    dataType: 'json'
   })
     .then(function (response) {
       // Printing the entire object to console
@@ -35,7 +47,7 @@ function recipes(ingredients) {
         <div class="card-image">
         <img max-width="100" height="200" src="${data.thumbnail}">
           <span class="card-title">${data.title}</span>
-          <a class="btn-floating halfway-fab waves-effect waves-light #ef9a9a red lighten-3" id="addRec" ><i class="material-icons">favorite_border</i></a>
+          <a class="btn-floating halfway-fab waves-effect waves-light #ef9a9a red lighten-3" id="addRec" href="shoppingList?title=${data.title}&ingredients=${data.ingredients}"><i class="material-icons">favorite_border</i></a>
         </div>
         <div class="card-content">
           <p>${data.ingredients}</p>
