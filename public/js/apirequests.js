@@ -17,11 +17,6 @@ function recipes(ingredients) {
       console.log(response.results);
       var results = response.results;
 
-      // var title = results.map(function (ele) {
-      //   console.log(ele.title);
-      //   return results.title;
-      // });
-
       const data = {
         title: results.title,
         link: results.href,
@@ -30,79 +25,31 @@ function recipes(ingredients) {
       };
       console.log(data);
 
-      // var href = results.map(function (ele) {
-      //   console.log(ele.href);
-      //   return results.href;
-      // });
-
-      var ingredients = results.map(function (ele) {
-        console.log(ele.ingredients);
-        return results.ingredients;
-      });
-
-      // var thumbnail = results.map(function (ele) {
-      //   console.log(ele.thumbnail);
-      //   return results.thumbnail;
-      // });
-
-      
       results.forEach(data => {
-          console.log('Result here',data)
-          $(".search-results").append(`
-          <div class="row">
-            <div class="col md3">${data.title}</div>
-            <div class="col md3">${data.href}</div>
-            <div class="col md3"><img src="${data.thumbnail}"></div>
-            <div class="col md3">${data.ingredients}</div>
-          </div>
-          `)  
+        console.log('Result here', data)
+        $(".search-results").append(`
+   <div>
+    <div class="col s12 m5" id="recipeForm">
+      <div class="card z-depth-5">
+        <div class="card-image">
+        <img max-width="100" height="200" src="${data.thumbnail}">
+          <span class="card-title">${data.title}</span>
+          <a class="btn-floating halfway-fab waves-effect waves-light #ef9a9a red lighten-3" id="addRec" ><i class="material-icons">favorite_border</i></a>
+        </div>
+        <div class="card-content">
+          <p>${data.ingredients}</p>
+        </div>
+        <div class="card-action">
+          <a href="${data.href}" target="_blank">Read more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+        `)
       })
 
-    //  on click add a recipe to a table apiResponse.js
-    $(document).on("click", "#addRec", function(e) {
-      e.preventDefault();
-
-      db.apiResults.create(data)
-      .then(newRecipe => {
-        if (!newRecipe) {
-          return document(null, false);
-        }
-
-        if(newRecipe) {
-          return document(console.log("added new recipe ${newRecipe.title}"))
-        }
-      });
-
-      db.userIngredientInputs.create(ingredients)
-      .then(newIngredients => {
-        if (!newIngredients) {
-          return document(null, false);
-        }
-
-        if (newIngredients) {
-          return (document(console.log("added new ingredients ${newIngredients.ingredients")))
-        }
-      })
-    })
-
-
-    // now display on a shopping list page 
-
-
-      // Constructing HTML containing the recipe information
-      // var recipeName = $("<h1>").text(response.title);
-      // var recipeLink = $("<a>").attr("href", response.href);
-      // var recipeImage = $("<img>").attr("src", response.thumbnail);
-      // var recipeIngredients = $("<h2>").text(response.ingredients);
-
-      // append the new recipe content
-
-      // $("#recipe-div").append(recipeName, recipeLink, recipeImage, recipeIngredients);
     })
 }
-
-
-
 
 
 //need to swap out the eyeglass icon image
