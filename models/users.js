@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    var User = sequelize.define('user', {
+    var user = sequelize.define('user', {
         
         id: {
             autoIncrement: true,
@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
         },
 
         username: {
-            type: DataTypes.TEXT
+            type: DataTypes.STRING,
+            unique: true,
         },
 
         email: {
@@ -44,6 +45,6 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
-    return User;
+    return user;
 
 }

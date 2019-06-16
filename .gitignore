@@ -8,5 +8,5 @@ data
 client-docker-compose.yml
 docker-compose.yml
 mysql-connect.sh
-config.json
 
+config.json

@@ -1,46 +1,75 @@
+module.exports = (router, passport) => {
 
-module.exports = (app, passport) => {
-    const express = require("express");
-    var passport = require("passport");
-
-    app.get("/", (req, res) => {
+    // displays login page
+    router.get("/index", (req, res) => {
         res.render("index");
     });
 
-    app.get("/signup", (req, res) => {
-        res.render("signup");
+    // displays signup page
+    router.get("/signup", (req, res) => {
+        res.render("signup")
     });
 
-    app.post("/signup", 
+    // displays login page
+    router.get("/search", (req, res) => {
+        res.render("search")
+    });
+
+    // sends through local strategy for signup, and if success to search
+    router.post("/signup",
         passport.authenticate("local-signup", {
-            successRedirect: "/login",
-            failureRedirect: "/login",
+            successRedirect: "/search",
+            failureRedirect: "/signup"
             // failureFlash: true
         })
     );
 
-    app.get("/index", isLoggedIn, (req, res) => {
-        res.render("index")
-    });
+    // sends through local strategy for login
+        router.post("/index",
+            passport.authenticate("local-login", {
+                successRedirect: "/search",
+                failureRedirect: "/index"
+                // failureFlash: true
+            })
+        );
+        console.log("logged in")
 
-    // app.get("/logout", (res, res) => {
-    //     req.session.destroy(err => {
-    //         res.redirect("/")
-    //     });
+    // router.get("/search", isLoggedIn, (req, res) => {
+    //     res.render("search")
     // });
 
-    app.post(
-        "/login",
-        passport.authenticate("local-signin", {
-            successRedirect: "/index",
-            failureRedirect: "/login",
-            // failureFlash: true
-        })
-    );
+    // router.post("/index",
+    //     passport.authenticate("local-login", (err) => {
+    //         if (err) {
+    //             res.redirect("/login");
+    //             console.log(err)
+    //         } else {
+    //             res.redirect("/search")
+    //         }
+    //     }
+    //  )
+    // );
+    // console.log("logged in")
+
+    router.get("/search", isLoggedIn, (req, res) => {
+        res.render("search")
+    });
+
+    router.get("/logout", (req, res) => {
+        req.session.destroy(err => {
+            res.redirect("/index")
+        });
+    });
+
+
+
+
 
     function isLoggedIn(req, res, next) {
-        if (req.isAuthenticated()) return next();
-        res.redirect("/login")
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        res.redirect("/search")
     }
 
 };
