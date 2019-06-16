@@ -2,6 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+
 const exphbs = require("express-handlebars");
 const passport = require("passport");
 const session = require("express-session");
@@ -34,7 +35,7 @@ console.log("300");
 // Routes
 // require("./routes/htmlRoutes")(app, passport);
 require("./routes/passportRoutes")(app, passport);
-
+console.log("350")
 
 const viewsPath = path.join(__dirname, 'views');
 const layoutsPath = path.join(viewsPath, 'layouts');
