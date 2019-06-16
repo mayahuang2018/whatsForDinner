@@ -1,9 +1,17 @@
 const bc = require("bcryptjs");
-const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const db = require("../models");
 
 module.exports = function (passport) {
+
+// serialize and deserialize User
+passport.serializeUser(function (user, cb) {
+    cb(null, user.id);
+});
+
+passport.deserializeUser(function (user, cb) {
+    cb(null, user);
+});
 
     // local signup strategy -- password, search database to see if user already exists, and if not then add a user
     passport.use(
@@ -49,7 +57,7 @@ module.exports = function (passport) {
         'local-login',
         new LocalStrategy({
                 // by default, local strategy uses username and password, we will override with email
-                usernameField: 'email',
+                usernameField: 'username',
                 passwordField: 'password',
                 passReqToCallback: true // allows us to pass back the entire request to the callback
             },
@@ -70,34 +78,25 @@ module.exports = function (passport) {
                                 message: "That username is already taken."
                             });
                         };
-                        if (!isValidPassword(users.password, password)) {
+                        if (!isValidPassword(user.password, password)) {
                             return done(null, false, {
                                 message: "Oops, wrong password!"
                             });
                         };
 
                         const userinfo = users.get();
-
+                        console.log(userinfo);
                         return done(null, userinfo);
                     })
-                    .catch(function (err) {
-                        console.log('Error:', err);
+                    // .catch(function (err) {
+                    //     console.log('Error:', err);
 
-                        return done(null, false, {
-                            message: 'Something went wrong with your Login'
-                        });
-                    });
+                    //     return done(null, false, {
+                    //         message: 'Something went wrong with your Login'
+                    //     });
+                    // });
             }
         )
     );
 
-
-    // serialize and deserialize User
-    passport.serializeUser(function (user, cb) {
-        cb(null, user.id);
-    });
-
-    passport.deserializeUser(function (user, cb) {
-        cb(null, user);
-    });
 }

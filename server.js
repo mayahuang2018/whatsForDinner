@@ -32,7 +32,7 @@ app.use(passport.session());
 console.log("300");
 
 // Routes
-require("./routes/htmlRoutes")(app, passport);
+// require("./routes/htmlRoutes")(app, passport);
 require("./routes/passportRoutes")(app, passport);
 
 
