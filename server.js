@@ -6,7 +6,7 @@ const app = express();
 const exphbs = require("express-handlebars");
 const passport = require("passport");
 const session = require("express-session");
-const flash = require("connect-flash");
+// const flash = require("connect-flash");
 const bc = require("bcryptjs");
 const PORT = process.env.PORT || 3874;
 const path = require("path");
@@ -34,7 +34,7 @@ console.log("300");
 
 // Routes
 
-// require("./routes/htmlRoutes")(app, passport);
+require("./routes/htmlRoutes")(app, passport);
 require("./routes/passportRoutes")(app, passport);
 console.log("350")
 
