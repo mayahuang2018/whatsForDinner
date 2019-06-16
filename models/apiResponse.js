@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             notEmpty: false
         },
+        userId:
+        {
+            type: DataTypes.INTEGER,
+            notEmpty: true, 
+        }
     });
 
     return apiResults;

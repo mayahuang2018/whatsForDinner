@@ -18,34 +18,6 @@ function recipes(ingredients) {
       console.log(response.results);
       var results = response.results;
 
-<<<<<<< HEAD
-      // response.results.map(function(ele) {console.log(ele.title)});
-      // response.results.map(function(ele) {console.log(ele.href)});
-      // response.results.map(function(ele) {console.log(ele.ingredients)})
-      
-      // Constructing HTML containing the recipe information
-      // for (let i = 0; i < response.results.length; i++) {
-      // var recipeName = response.results[i].title;
-      // var recipeLink =response.results[i].href;
-      // var recipeImage =  response.results[i].thumbnail;
-      // var recipeIngredients =response.results[i].ingredients;
-      // console.log(response.results[i].title)
-
-      // var recipeDiv = $("<div>");
-      // recipeDiv.attr("class", "card");
-      // var aboutRecipe =  $("<h1>").html(recipeName);
-      // aboutRecipe.attr("class", "card-title activator grey-text text-darken-4");
-      // var image = $("<img>").attr("src", recipeImage).attr("class","activator");
-      // var cardLink = $("<p>").html("<a href="+recipeLink+">Read more</a>");
-      // var cardContent = $("<div>").attr("class","card-content").html("<p>"+response.results[i].ingredients+"<p>");
-
-      // recipeDiv.append(image);
-      // recipeDiv.append(aboutRecipe);
-      // recipeDiv.append(cardContent);
-      // recipeDiv.append(cardLink);
-
-=======
->>>>>>> f01025a118abe56a5cfb454e8f46b62cb9fdb816
       const data = {
         title: results.title,
         link: results.href,
