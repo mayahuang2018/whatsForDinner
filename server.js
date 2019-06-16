@@ -2,20 +2,17 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+
 const exphbs = require("express-handlebars");
 const passport = require("passport");
 const session = require("express-session");
+const flash = require("connect-flash");
 const bc = require("bcryptjs");
-const db = require("./models");
-const PORT = process.env.PORT || 6258;
+const PORT = process.env.PORT || 3874;
 const path = require("path");
-const cors = require("cors")
+const db = require("./models");
 
-// Routes
-require("./routes/htmlRoutes")(app);
-require("./routes/passportRoutes")(app)
-require("./config/passport.js")(passport, db.user);
-
+console.log("100");
 
 // Middleware
 app.use(express.urlencoded({
@@ -23,18 +20,23 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(express.static("public"));
+console.log("200");
 
-const localStrategyRoute = require("./routes/passportRoutes")(app, passport);
+passport
+require("./config/passport.js")(passport);
 
-require("./config/passport")(passport)
-
-// passport
 app.use(
   session({ secret: "blahblahblah", resave: true, saveUninitialized: true })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+console.log("300");
 
+// Routes
+
+// require("./routes/htmlRoutes")(app, passport);
+require("./routes/passportRoutes")(app, passport);
+console.log("350")
 
 const viewsPath = path.join(__dirname, 'views');
 const layoutsPath = path.join(viewsPath, 'layouts');
@@ -47,12 +49,11 @@ app.engine(
   exphbs({
     defaultLayout: "main",
     layoutsDir: layoutsPath,
-    partialsDir: [partialsPath],
+    partialsDir: partialsPath,
   })
 );
 app.set("view engine", "handlebars");
-
-
+console.log("400");
 
 var syncOptions = {
   force: false
@@ -66,6 +67,7 @@ if (process.env.NODE_ENV === "test") {
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function () {
+  console.log("410");
   app.listen(PORT, function () {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
@@ -74,5 +76,6 @@ db.sequelize.sync(syncOptions).then(function () {
     );
   });
 });
+console.log("500");
 
 module.exports = app;
