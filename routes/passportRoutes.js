@@ -24,7 +24,7 @@ module.exports = (router, passport) => {
         })
     );
 
-    // sends through local strategy for login
+    // sends through local strategy for login, and if success to search
         router.post("/index",
             passport.authenticate("local-login", {
                 successRedirect: "/search",
