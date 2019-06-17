@@ -51,7 +51,7 @@ module.exports = (app, passport) => {
     //  )
     // );
     // console.log("logged in")
-
+    
     app.get("/search", isLoggedIn, (req, res) => {
         res.render("search")
     });
