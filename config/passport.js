@@ -3,16 +3,18 @@ const bc = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
 const db = require("../models");
 
-
 module.exports = function (passport) {
 
-// serialize the user
+// serialize the user - so browser can have cookies
 passport.serializeUser(function (user, cb) {
-    cb(null, user.id);
+    console.log(user);
+    var userObj = { id: user.id, username: user.username, email: user.email };
+    console.log(userObj);
+    cb(null, userObj);
 });
-// deserialize the user
-passport.deserializeUser(function (user, cb) {
-    cb(null, user);
+// deserialize the user - makes the user info an object to be used
+passport.deserializeUser(function (userObj, cb) {
+    cb(null, userObj);
 });
 
     // local signup strategy -- passport, search database to see if user already exists, and if not then add a user

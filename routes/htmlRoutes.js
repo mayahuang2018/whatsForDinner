@@ -52,9 +52,14 @@ module.exports = (app) => {
         }
       });
     
-     
        // 404 route loads 404.handlebars
        app.get("../404", (req, res) => {
          res.render("404");
        });
+
+       app.get("/signout", function(req, res) {
+        req.logout();
+        res.redirect("index");
+      });
+
 }

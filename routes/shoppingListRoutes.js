@@ -5,7 +5,7 @@ module.exports = function(app) {
 app.get("/api/apiShoppingList", function (req, res) {
     var query = {};
     if (req.query._id) {
-        query.ashoppingList = req.query.shoppingList_id;
+        query.apishoppingList = req.query.shoppingList_id;
     }
     db.shoppingList.findAll({
         where: query
