@@ -10,9 +10,7 @@ module.exports = (app) => {
 
   // if does not have account send to signup page
     app.get("/signup", (req, res) => {
-        console.log(800)
-     
-        
+        console.log(800) 
         res.render("signup");
       });  
 
@@ -21,7 +19,7 @@ module.exports = (app) => {
     app.get("/search", (req, res) => {
         console.log(900)
       if (req.isAuthenticated()) {
-        res.render("search");
+        res.render("search", req.session.passport.user);
       } else {
         res.render("index");
       }
@@ -30,7 +28,7 @@ module.exports = (app) => {
   // fav recipes route
     app.get("/results", (req, res) => {
       if (req.isAuthenticated()) {
-        res.render("results");
+        res.render("results", req.session.passport.user);
       } else {
         res.render("index");
       }
@@ -39,7 +37,15 @@ module.exports = (app) => {
 //    fav recipes route
   app.get("/shoppingList", (req, res) => {
     if (req.isAuthenticated()) {
-      res.render("shoppingList");
+      res.render("shoppingList", req.session.passport.user);
+    } else {
+      res.render("index");
+    }
+  });
+
+  app.get("/shoppingList*", (req, res) => {
+    if (req.isAuthenticated()) {
+      res.render("shoppingList", req.session.passport.user);
     } else {
       res.render("index");
     }
