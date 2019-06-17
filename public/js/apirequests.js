@@ -1,5 +1,15 @@
+//import { userInfo } from "os";
+
 // const recipe = require("../models/apiResponse");
 // const db = require("../models");
+
+// var connection = mysql.createConnection({
+//   host: "localhost",
+//   port: 3306,
+//   user: "root",
+//   password: "root",
+//   database: "dinner_db"
+// });                       
 
 function getUrlVars() {
   var vars = {};
@@ -10,6 +20,8 @@ function getUrlVars() {
 }
 var printTitle = decodeURI(getUrlVars()["title"]);
 var printIngredients = decodeURI(getUrlVars()["ingredients"]);
+
+
 
 // console.log(printTitle)
 // console.log(printIngredients)
@@ -74,5 +86,30 @@ $(document).on("click", '#search', function (event) {
   console.log(inputRecipe)
   // Running the function(passing in the recipe as an argument)
   recipes(inputRecipe);
+
+});
+
+
+
+
+
+$(document).on("click", '#submit', function (event) {
+  // Preventing the button from trying to submit the form
+  event.preventDefault();
+  // Storing the recipe name
+  // var newTitle = $("#recipe-input").val().trim();
+  // var newIngredients = $("#recipe-input").val().trim();
+  
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    // var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
+    // con.query(sql, function (err, result) {
+    //   if (err) throw err;
+    //   console.log("1 record inserted");
+    // });
+  });
+
+
 
 });
