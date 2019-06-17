@@ -14,7 +14,7 @@ module.exports = (app) => {
           if(req.isAuthenticated()) {
             var user = {
               id: req.session.passport.user,
-              hasAccount: req.Authenticated()
+              isLoggedIn: req.Authenticated()
             }
             console.log(user)
             res.redirect("index", user);
@@ -42,7 +42,7 @@ module.exports = (app) => {
             res.render("index");
           }
         });
-    
+        
     //    fav recipes route
       app.get("/shoppingList", (req, res) => {
         if (req.isAuthenticated()) {
