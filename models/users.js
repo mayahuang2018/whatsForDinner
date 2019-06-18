@@ -45,6 +45,14 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
+    user.associate = function(models) {
+        // Associating user with shoppingList
+        // When an user is deleted, also delete any associated shoppingList
+        user.hasMany(models.shoppingLists, {
+          onDelete: "cascade"
+        });
+      };
+
     return user;
 
 }

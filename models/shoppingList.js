@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.JSON,
             allowNull: false,
         },
-        
+
         // 
         // ingredient2: {
         //     type: DataTypes.STRING,
@@ -46,6 +46,16 @@ module.exports = (sequelize, DataTypes) => {
         //     defaultValue: false
         // }
     });
+
+    shoppingLists.associate = function(models) {
+        // We're saying that a Post should belong to an Author
+        // A Post can't be created without an Author due to the foreign key constraint
+        shoppingLists.belongsTo(models.user, {
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      };
 
     return shoppingLists;
 
