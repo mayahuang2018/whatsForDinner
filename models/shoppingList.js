@@ -51,10 +51,10 @@ module.exports = (sequelize, DataTypes) => {
         // We're saying that a Post should belong to an Author
         // A Post can't be created without an Author due to the foreign key constraint
         shoppingLists.belongsTo(models.user, {
-          foreignKey: {
+          foreignKey: "userID", 
             allowNull: false
           }
-        });
+        );
       };
 
     return shoppingLists;
