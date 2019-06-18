@@ -7,10 +7,21 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER
         },
 
-        ingredient1: {
+        title: {
             type: DataTypes.TEXT,
             allowNull: false,
         },
+
+        ingredients: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+
+        userID: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        // i
         // ingredient2: {
         //     type: DataTypes.STRING,
         //     allowNull: false,

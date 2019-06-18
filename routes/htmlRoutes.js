@@ -50,7 +50,7 @@ module.exports = (app) => {
       res.render("index");
     }
   });
-
+  
    // 404 route loads 404.handlebars
    app.get("../404", (req, res) => {
      res.render("404");

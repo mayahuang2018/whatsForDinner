@@ -1,33 +1,40 @@
 <div class="container">
+
  <div class="row">
     <div class="col s12">
       <div class="card"> 
         <div class="card-content #424242 grey-text text-darken-3">
           <span class="card-title">Shopping List</span>
-   <form action="POST">
+
+
+   <form method="POST" action="/api/shoppingLists">
       <div class="row">
         <div class="input-field col s6">
           <input id="receipe_name" type="text" class="validate">
-          <label for="receipe_name"></label>
-          <p>Recipe Name</p>
+          <label for="receipe_name">Recipe Name:  <script type="text/javascript">document.write(printTitle)</script></label>
         </div>
       </div>
-      
       <div class="row">
         <div class="input-field col s12">
           <textarea id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1"></label>
-          <p>Ingredients</p>
+          <label for="textarea1">Ingredients:  <script type="text/javascript">document.write(printIngredients)</script></label>
         </div>
       </div>
-       <button id="submit" class="btn #90a4ae blue-grey lighten-2">Submit</button>
+       <button id="submitList" class="btn #90a4ae blue-grey lighten-2">Save to favorites</button>
     </form>
         
         </div>
         <div class="card-action">
-           <a href="/" class="#5d4037 brown-text text-darken-2">← Back To Home</a>
+           <a href="/search" class="#5d4037 brown-text text-darken-2">← Back To Home</a>
         </div>
       </div>
     </div>
   </div> 
-</div> 
+</div>  
+
+<div>
+  <button id="testButton">TEST</button>
+</div>
+
+<script>
+
