@@ -39,3 +39,5 @@ module.exports = (app, passport) => {
     console.log("passportRoutes available");
 
 };
+
+// I would add the failure flash on here to give alerts if signup for failure are not correct for whatever reason

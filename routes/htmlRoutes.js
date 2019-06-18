@@ -17,11 +17,10 @@ module.exports = (app) => {
       res.render("signup")
   });
 
-  // displays search page
-  app.get("/search", (req, res) => {
-      res.render("search")
-  });
-
+  // // displays search page
+  // app.get("/search", (req, res) => {
+  //     res.render("search", req.session.passport.user)
+  // });
 
   // if does not have account send to signup page
     app.get("/signup", (req, res) => {
