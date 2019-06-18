@@ -9,7 +9,17 @@
 //   user: "root",
 //   password: "root",
 //   database: "dinner_db"
-// });                       
+// });      
+
+// connection.connect(function(err) {
+//   if (err) {
+//     console.error("error connecting: " + err.stack);
+//     return;
+//   }
+//   console.log("connected as id " + connection.threadId);
+// });
+
+$(document).ready(function(){
 
 function getUrlVars() {
   var vars = {};
@@ -28,6 +38,7 @@ var printIngredients = decodeURI(getUrlVars()["ingredients"]);
 
 
 function recipes(ingredients) {
+  $(".search-results").empty();
 
   // var ingredients = $("#search").val();
   // console.log('get recipes')
@@ -76,9 +87,19 @@ function recipes(ingredients) {
     })
 }
 
+var input = document.getElementById("recipe-input");
+  input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      console.log("enter button");
+     event.preventDefault();
+     document.getElementById("search").click();
+    }
+  });
+
 
 //need to swap out the eyeglass icon image
-$(document).on("click", '#search', function (event) {
+$('#search').on("click", function (event) {
+  
   // Preventing the button from trying to submit the form
   event.preventDefault();
   // Storing the recipe name
@@ -86,30 +107,28 @@ $(document).on("click", '#search', function (event) {
   console.log(inputRecipe)
   // Running the function(passing in the recipe as an argument)
   recipes(inputRecipe);
+  console.log(inputRecipe)
+
+});
 
 });
 
 
 
-
-
-$(document).on("click", '#submit', function (event) {
-  // Preventing the button from trying to submit the form
-  event.preventDefault();
-  // Storing the recipe name
-  // var newTitle = $("#recipe-input").val().trim();
-  // var newIngredients = $("#recipe-input").val().trim();
+// $(document).on("click", '#submit', function (event) {
+//   // Preventing the button from trying to submit the form
+//   event.preventDefault();
+//   // Storing the recipe name
+//   // var newTitle = $("#recipe-input").val().trim();
+//   // var newIngredients = $("#recipe-input").val().trim();
   
-  connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    // var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
-    // con.query(sql, function (err, result) {
-    //   if (err) throw err;
-    //   console.log("1 record inserted");
-    // });
-  });
+//   connection.connect(function(err) {
+//     if (err) throw err;
+//     console.log("Connected!");
+//     // var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
+//     // con.query(sql, function (err, result) {
+//     //   if (err) throw err;
+//     //   console.log("1 record inserted");
+//     // });
+//   });
 
-
-
-});
