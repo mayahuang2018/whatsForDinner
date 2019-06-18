@@ -35,18 +35,20 @@ module.exports = passport => {
                 const generateHash = password => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
                 };
-
+                // looks in the db to find the email
                 db.User.findOne({
                     where: {
                         email: email
                     }
+                // then determines if a user or not
                 }).then(User => {
+                    // if an email exists in the table already, then tell user that it already exists
                     if (User) {
                         return done(null, false, {
                             message: 'That username is already taken'
                         });
                     } else {
-                        // store the user password as a hash
+                        // store the user password and hash it
                         const userPassword = generateHash(password);
                         console.log(userPassword);
                         // store the registration info as a variable
@@ -63,12 +65,12 @@ module.exports = passport => {
                         // ideally this would have more robust rules for creating a new user
                         db.user.create(data)
                             .then(newUser => {
-                                // console.log(newUser);
+                                // if not a new user, don't create
                                 if (!newUser) {
                                     console.log("notNewUser");
                                     return done(null, false);
                                 }
-
+                                // if a new user, create record
                                 if (newUser) {
                                     console.log("newUser");
                                     return done(console.log("created new user"));
@@ -109,6 +111,7 @@ module.exports = passport => {
                         // password: userPassword
                     }
                 }).then((user => {
+                    // if username does not exist in table
                         if (!user) {
                             console.log("not a user");
                             console.log({
@@ -118,6 +121,7 @@ module.exports = passport => {
                                 message: "some message"
                             });
                         };
+                    // if username is in table, then check to see if a valid password
                         if (!isValidPassword(user.password, password)) {
                             return done(null, {
                                 message: "Oops, wrong password!"

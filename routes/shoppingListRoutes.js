@@ -1,29 +1,30 @@
 const db = require("../models");
 
-module.exports = function (app) {
+module.exports = (app) => {
     // Get all examples
-    app.get("/api/shoppingLists", function (req, res) {
-        db.shoppingLists.findAll({}).then(function (dbDinner) {
-            res.json(dbDinner);
+    app.get("/api/shoppingLists", (req, res) => {
+        db.shoppingLists.findAll({}).then(dbshoppingLists => {
+            res.json(dbshoppingLists);
         });
     });
 
-    app.get("/api/shoppingLists", function (req, res) {
+    app.get("/api/shoppingLists", (req, res) => {
         db.shoppingLists.findOne({
             where: {
                 id: req.params
             }
-        }).then(function (dbshoppingLists) {
-            res.json(dbAuthor);
+        }).then(dbshoppingLists => {
+            res.json(dbshoppingLists);
         });
     })
 
-    app.post("/api/shoppingLists", function (req, res) {
+    app.post("/api/shoppingLists", (req, res) => {
         console.log("post shopping list");
+
         const shoppingListObj = {
             title: req.body.title,
             ingredients: req.body.ingredients,
-            // userID: req.session.passport.user
+            userID: req.session.passport.user
         };
         console.log(shoppingListObj);
         db.shoppingLists.create(shoppingListObj).then(function (dbshoppingLists) {

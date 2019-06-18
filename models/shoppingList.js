@@ -16,13 +16,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-
+        
 
         userID: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.JSON,
             allowNull: false,
         },
-        // i
+        
+        // 
         // ingredient2: {
         //     type: DataTypes.STRING,
         //     allowNull: false,

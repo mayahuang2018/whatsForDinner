@@ -8,7 +8,15 @@ function getUrlVars() {
 var printTitle = decodeURI(getUrlVars()["title"]);
 var printIngredients = decodeURI(getUrlVars()["ingredients"]);
 
-
+// const ingredientsData = {
+//   title: printTitle,
+//   ingredients: printIngredients
+// }
+// $(document).on("click", "#submitList", function saveShoppingList(ingredientsData) {
+//   $.post("/api/shoppingList", ingredientsData);
+//   console.log(ingredientsData, "ingredientsData")
+//   saveShoppingList();
+// });
 
 // console.log(printTitle)
 // console.log(printIngredients)
