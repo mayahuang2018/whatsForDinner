@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    var shoppingList = sequelize.define('shoppingList', {
+    var shoppingLists = sequelize.define('shoppingLists', {
         
         id: {
             autoIncrement: true,
@@ -8,14 +8,15 @@ module.exports = (sequelize, DataTypes) => {
         },
 
         title: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             allowNull: false,
         },
 
         ingredients: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             allowNull: false,
         },
+
 
         userID: {
             type: DataTypes.INTEGER,
@@ -45,6 +46,8 @@ module.exports = (sequelize, DataTypes) => {
         // }
     });
 
-    return shoppingList;
+    return shoppingLists;
 
 }
+
+// needs to associate the user with the recipe.

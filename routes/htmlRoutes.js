@@ -7,6 +7,21 @@ module.exports = (app) => {
       res.render("index");
   });
 
+  // displays login page
+    app.get("/index", (req, res) => {
+      res.render("index");
+  });
+
+  // displays signup page
+  app.get("/signup", (req, res) => {
+      res.render("signup")
+  });
+
+  // displays search page
+  app.get("/search", (req, res) => {
+      res.render("search")
+  });
+
 
   // if does not have account send to signup page
     app.get("/signup", (req, res) => {
@@ -55,4 +70,6 @@ module.exports = (app) => {
    app.get("../404", (req, res) => {
      res.render("404");
    });
+
+   console.log("htmlRoutes available");
 }

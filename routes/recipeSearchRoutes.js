@@ -23,8 +23,9 @@ module.exports = app => {
             res.redirect("/");
         }
     }).catch(err => {
-    console.log(err, req.query.apiRespose)
+    console.log(err, req.query.apiResponse)
     });
 
 }
 
+// we were going towards the ability to search the saved recipies. we did not get to this part.

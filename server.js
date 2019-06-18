@@ -33,7 +33,7 @@ app.use(passport.session());
 console.log("300");
 
 // Routes
-
+require("./routes/shoppingListRoutes")(app);
 require("./routes/htmlRoutes")(app, passport);
 require("./routes/passportRoutes")(app, passport);
 console.log("350")

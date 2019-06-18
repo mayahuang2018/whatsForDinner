@@ -67,14 +67,14 @@ function recipes(ingredients) {
 $(document).ready(function(){
 
 
-var input = document.getElementById("recipe-input");
-  input.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-      console.log("enter button");
-     event.preventDefault();
-     document.getElementById("search").click();
-    }
-  });
+// var input = document.getElementById("recipe-input");
+//   input.addEventListener("keyup", function(event) {
+//     if (event.keyCode === 13) {
+//       console.log("enter button");
+//      event.preventDefault();
+//      document.getElementById("search").click();
+//     }
+//   });
 
 
 //need to swap out the eyeglass icon image
