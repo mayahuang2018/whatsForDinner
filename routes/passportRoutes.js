@@ -1,69 +1,33 @@
-module.exports = (router, passport) => {
-
-    // displays login page
-    router.get("/index", (req, res) => {
-        res.render("index");
-    });
-
-    // displays signup page
-    router.get("/signup", (req, res) => {
-        res.render("signup")
-    });
-
-    // displays login page
-    router.get("/search", (req, res) => {
-        res.render("search")
-    });
+module.exports = (app, passport) => {
 
     // sends through local strategy for signup, and if success to search
-    router.post("/signup",
+    app.post("/signup",
         passport.authenticate("local-signup", {
-            successRedirect: "/search",
+            successRedirect: "/login",
             failureRedirect: "/signup"
             // failureFlash: true
-        })
+        }),
     );
+   
 
-    // sends through local strategy for login
-        router.post("/index",
+    // sends through local strategy for login, and if success to search
+        app.post("/index",
             passport.authenticate("local-login", {
                 successRedirect: "/search",
                 failureRedirect: "/index"
                 // failureFlash: true
             })
         );
-        console.log("logged in")
-
-    // router.get("/search", isLoggedIn, (req, res) => {
-    //     res.render("search")
-    // });
-
-    // router.post("/index",
-    //     passport.authenticate("local-login", (err) => {
-    //         if (err) {
-    //             res.redirect("/login");
-    //             console.log(err)
-    //         } else {
-    //             res.redirect("/search")
-    //         }
-    //     }
-    //  )
-    // );
-    // console.log("logged in")
-
-    router.get("/search", isLoggedIn, (req, res) => {
+    
+    app.get("/search", isLoggedIn, (req, res) => {
         res.render("search")
     });
 
-    router.get("/logout", (req, res) => {
+    app.get("/logout", (req, res) => {
         req.session.destroy(err => {
             res.redirect("/index")
         });
     });
-
-
-
-
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {
@@ -72,4 +36,8 @@ module.exports = (router, passport) => {
         res.redirect("/search")
     }
 
+    console.log("passportRoutes available");
+
 };
+
+// I would add the failure flash on here to give alerts if signup for failure are not correct for whatever reason

@@ -6,7 +6,7 @@ const app = express();
 const exphbs = require("express-handlebars");
 const passport = require("passport");
 const session = require("express-session");
-const flash = require("connect-flash");
+// const flash = require("connect-flash");
 const bc = require("bcryptjs");
 const PORT = process.env.PORT || 3874;
 const path = require("path");
@@ -23,7 +23,7 @@ app.use(express.static("public"));
 console.log("200");
 
 passport
-require("./config/passport")(passport);
+require("./config/passport.js")(passport);
 
 app.use(
   session({ secret: "blahblahblah", resave: true, saveUninitialized: true })
@@ -33,8 +33,8 @@ app.use(passport.session());
 console.log("300");
 
 // Routes
-
-// require("./routes/htmlRoutes")(app, passport);
+require("./routes/shoppingListRoutes")(app);
+require("./routes/htmlRoutes")(app, passport);
 require("./routes/passportRoutes")(app, passport);
 console.log("350")
 

@@ -1,55 +1,53 @@
- <div class="container">
+<div class="container">
 
  <div class="row">
     <div class="col s12">
       <div class="card"> 
         <div class="card-content #424242 grey-text text-darken-3">
-          <span class="card-title">Card Title</span>
+          <span class="card-title">Shopping List</span>
 
-   <form action="POST">
+
+   <form method="POST" action="/api/shoppingLists">
       <div class="row">
         <div class="input-field col s6">
-          <input id="receipe_name" type="text" class="validate">
-          <label for="receipe_name">Receipe Name</label>
+          {{!-- <input id="receipe_name" type="text" class="validate"> --}}
+          <input name="title" for="receipe_name">Recipe Name:  <script type="text/javascript">document.write(printTitle)</script></input>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
+          {{!-- <textarea id="textarea1" class="materialize-textarea"></textarea> --}}
+          <input name="ingredients" for="textarea1">Ingredients:  <script type="text/javascript">document.write(printIngredients)</script></input>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1">Textarea</label>
-        </div>
-      </div>
-       <button id="submit" class="btn #90a4ae blue-grey lighten-2">Submit</button>
+       <button id="submitList" class="btn #90a4ae blue-grey lighten-2">Save to favorites</button>
     </form>
         
         </div>
         <div class="card-action">
-           <a href="/" class="#5d4037 brown-text text-darken-2">← Back To Home</a>
+           <a href="/search" class="#5d4037 brown-text text-darken-2">← Back To Home</a>
         </div>
       </div>
     </div>
   </div> 
 </div>  
 
+{{!-- <div>
+  <button id="testButton">TEST</button>
+</div>
 
+<script>
 
+$(document).ready(function() {
 
-
-
-
-
-
- 
-
+  $(document).on("click", '#testButton', function (event) {
+    event.preventDefault();
+    $.ajax({
+      url: "/api/shoppingLists",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({title: "title", ingredients: "ingredietns"})
+    });
+  });
+});
+</script> --}}

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    var shoppingList = sequelize.define('shoppingList', {
+    var shoppingLists = sequelize.define('shoppingLists', {
         
         id: {
             autoIncrement: true,
@@ -7,10 +7,23 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER
         },
 
-        ingredient1: {
-            type: DataTypes.TEXT,
+        title: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
+
+        ingredients: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        
+
+        userID: {
+            type: DataTypes.JSON,
+            allowNull: false,
+        },
+
+        // 
         // ingredient2: {
         //     type: DataTypes.STRING,
         //     allowNull: false,
@@ -34,6 +47,18 @@ module.exports = (sequelize, DataTypes) => {
         // }
     });
 
-    return shoppingList;
+    shoppingLists.associate = function(models) {
+        // We're saying that a Post should belong to an Author
+        // A Post can't be created without an Author due to the foreign key constraint
+        shoppingLists.belongsTo(models.user, {
+          foreignKey: "userID", 
+            allowNull: false
+          }
+        );
+      };
+
+    return shoppingLists;
 
 }
+
+// needs to associate the user with the recipe.

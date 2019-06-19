@@ -1,8 +1,39 @@
-// const recipe = require("../models/apiResponse");
-// const db = require("../models");
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
+}
+var printTitle = decodeURI(getUrlVars()["title"]);
+var printIngredients = decodeURI(getUrlVars()["ingredients"]);
+
+// $(document).on("click", "#submitList", function(e) {
+//   e.preventDefault();
+//   $.ajax({
+//     url: "/api/shoppingList",
+//     method: "POST",
+//     data: {title: "", ingredients: ""},
+//     contentType: 'application/json; charset=utf-8'
+//   }
+// );
+
+// const ingredientsData = {
+//   title: printTitle,
+//   ingredients: printIngredients
+// }
+// $(document).on("click", "#submitList", function saveShoppingList(ingredientsData) {
+//   $.post("/api/shoppingList", ingredientsData);
+//   console.log(ingredientsData, "ingredientsData")
+//   saveShoppingList();
+// });
+
+// console.log(printTitle)
+// console.log(printIngredients)
 
 
 function recipes(ingredients) {
+  $(".search-results").empty();
 
   // var ingredients = $("#search").val();
   // console.log('get recipes')
@@ -34,7 +65,7 @@ function recipes(ingredients) {
         <div class="card-image">
         <img max-width="100" height="200" src="${data.thumbnail}">
           <span class="card-title">${data.title}</span>
-          <a class="btn-floating halfway-fab waves-effect waves-light #ef9a9a red lighten-3" id="addRec" ><i class="material-icons">favorite_border</i></a>
+          <a class="btn-floating halfway-fab waves-effect waves-light #ef9a9a red lighten-3" id="addRec" href="shoppingList?title=${data.title}&ingredients=${data.ingredients}"><i class="material-icons">favorite_border</i></a>
         </div>
         <div class="card-content">
           <p>${data.ingredients}</p>
@@ -51,9 +82,22 @@ function recipes(ingredients) {
     })
 }
 
+$(document).ready(function(){
+
+
+// var input = document.getElementById("recipe-input");
+//   input.addEventListener("keyup", function(event) {
+//     if (event.keyCode === 13) {
+//       console.log("enter button");
+//      event.preventDefault();
+//      document.getElementById("search").click();
+//     }
+//   });
+
 
 //need to swap out the eyeglass icon image
-$(document).on("click", '#search', function (event) {
+$('#search').on("click", function (event) {
+  
   // Preventing the button from trying to submit the form
   event.preventDefault();
   // Storing the recipe name
@@ -61,5 +105,8 @@ $(document).on("click", '#search', function (event) {
   console.log(inputRecipe)
   // Running the function(passing in the recipe as an argument)
   recipes(inputRecipe);
+  console.log(inputRecipe)
+
+});
 
 });

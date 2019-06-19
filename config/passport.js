@@ -1,19 +1,24 @@
+// requirements
 const bc = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
 const db = require("../models");
 
+
 module.exports = function (passport) {
 
-// serialize and deserialize User
+// serialize the user
 passport.serializeUser(function (user, cb) {
-    cb(null, user.id);
+    console.log(user);
+    var userObj = { id: user.id, username: user.username, email: user.email };
+    console.log(userObj, "userObj");
+    cb(null, userObj);
+});
+// deserialize the user
+passport.deserializeUser(function (userObj, cb) {
+    cb(null, userObj);
 });
 
-passport.deserializeUser(function (user, cb) {
-    cb(null, user);
-});
-
-    // local signup strategy -- password, search database to see if user already exists, and if not then add a user
+    // local signup strategy -- passport, search database to see if user already exists, and if not then add a user
     passport.use(
         'local-signup',
         new LocalStrategy({
@@ -21,14 +26,16 @@ passport.deserializeUser(function (user, cb) {
                 passReqToCallback: true
             },
 
-            
             function (req, username, password, done) {
+                // generates a hash for the password, and salt for the password
                 const generateHash = password => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
                 };
 
+                // store the user password as a hash
                 const userPassword = generateHash(password);
                 console.log(userPassword);
+                // store the registration info as a variable
                 const data = {
                     username: username,
                     email: req.body.email,
@@ -38,14 +45,18 @@ passport.deserializeUser(function (user, cb) {
                 }
                 console.log(username);
 
+                // determin when to create a new user in the database table
+                // ideally this would have more robust rules for creating a new user
                 db.user.create(data)
                     .then(newUser => {
                         // console.log(newUser);
                         if (!newUser) {
+                            console.log("notNewUser");
                             return done(null, false);
                         }
 
                         if (newUser) {
+                            console.log("newUser");
                             return done(console.log("created new user"));
                         }
                     });
@@ -53,11 +64,11 @@ passport.deserializeUser(function (user, cb) {
     );
 
 
-    //local login - check to see is a user, give error hints. If user, log in, and if not send to signup page.
+    //local login - check to see if is a user. If user, log in, and if not send to signup page.
     passport.use(
         'local-login',
         new LocalStrategy({
-                // by default, local strategy uses username and password, we will override with email
+                // by default, local strategy uses username and password
                 usernameField: 'username',
                 passwordField: 'password',
                 passReqToCallback: true // allows us to pass back the entire request to the callback
@@ -65,6 +76,7 @@ passport.deserializeUser(function (user, cb) {
 
             function (req, username, password, done) {
 
+                // compares the password the user enters at login to the stored hashed password 
                 const isValidPassword = function (userpass, password) {
                     console.log(password, userpass)
                     return bc.compareSync(password, userpass);
@@ -75,6 +87,7 @@ passport.deserializeUser(function (user, cb) {
                 };
                 const userPassword = generateHash(password);
 
+                // looks to the database table to find a username
                 db.user.findOne({
                         where: {
                             username: req.body.username,
@@ -93,8 +106,7 @@ passport.deserializeUser(function (user, cb) {
                                 message: "Oops, wrong password!"
                             });
                         }
-                    
-
+                     
                         const userinfo = user.get();
                         console.log(userinfo, "yay!");
                         return done(null, userinfo);
