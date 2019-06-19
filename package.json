@@ -4,10 +4,7 @@
   "description": "Project 2 Starter",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "lint": "eslint **/*.js --quiet",
-    "fix": "eslint --fix .",
-    "test": "npm run lint && NODE_ENV=test mocha -u tdd --reporter spec --exit"
+    "start": "server.js",
   },
   "license": "ISC",
   "dependencies": {
@@ -23,8 +20,5 @@
     "passport-local": "^1.0.0",
     "sequelize": "^5.8.7",
     "sequelize-cli": "^5.5.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.19.1"
   }
 }
