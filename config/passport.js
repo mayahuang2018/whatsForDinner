@@ -21,6 +21,7 @@ passport.deserializeUser(function (user, cb) {
                 passReqToCallback: true
             },
 
+            
             function (req, username, password, done) {
                 const generateHash = password => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
