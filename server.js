@@ -23,7 +23,7 @@ app.use(express.static("public"));
 console.log("200");
 
 passport
-require("./config/passport.js")(passport);
+require("./config/passport")(passport);
 
 app.use(
   session({ secret: "blahblahblah", resave: true, saveUninitialized: true })
