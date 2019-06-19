@@ -8,6 +8,16 @@ function getUrlVars() {
 var printTitle = decodeURI(getUrlVars()["title"]);
 var printIngredients = decodeURI(getUrlVars()["ingredients"]);
 
+// $(document).on("click", "#submitList", function(e) {
+//   e.preventDefault();
+//   $.ajax({
+//     url: "/api/shoppingList",
+//     method: "POST",
+//     data: {title: "", ingredients: ""},
+//     contentType: 'application/json; charset=utf-8'
+//   }
+// );
+
 // const ingredientsData = {
 //   title: printTitle,
 //   ingredients: printIngredients
