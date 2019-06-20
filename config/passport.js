@@ -4,17 +4,17 @@ const LocalStrategy = require("passport-local").Strategy;
 const db = require("../models");
 
 
-module.exports = function (passport) {
+module.exports = passport => {
 
 // serialize the user
-passport.serializeUser(function (user, cb) {
+passport.serializeUser((user, cb) => {
     console.log(user);
     var userObj = { id: user.id, username: user.username, email: user.email };
     console.log(userObj, "userObj");
     cb(null, userObj);
 });
 // deserialize the user
-passport.deserializeUser(function (userObj, cb) {
+passport.deserializeUser((userObj, cb) => {
     cb(null, userObj);
 });
 
@@ -26,7 +26,7 @@ passport.deserializeUser(function (userObj, cb) {
                 passReqToCallback: true
             },
 
-            function (req, username, password, done) {
+            (req, username, password, done) => {
                 // generates a hash for the password, and salt for the password
                 const generateHash = password => {
                     return bc.hashSync(password, bc.genSaltSync(8), null);
@@ -74,10 +74,10 @@ passport.deserializeUser(function (userObj, cb) {
                 passReqToCallback: true // allows us to pass back the entire request to the callback
             },
 
-            function (req, username, password, done) {
+            (req, username, password, done) => {
 
                 // compares the password the user enters at login to the stored hashed password 
-                const isValidPassword = function (userpass, password) {
+                const isValidPassword = (userpass, password) => {
                     console.log(password, userpass)
                     return bc.compareSync(password, userpass);
                 };
@@ -93,7 +93,7 @@ passport.deserializeUser(function (userObj, cb) {
                             username: req.body.username,
                             // password: userPassword
                         }
-                    }).then((function (user) {
+                    }).then((user => {
                         if (!user) {
                             console.log("not a user");
                             console.log({
@@ -111,13 +111,6 @@ passport.deserializeUser(function (userObj, cb) {
                         console.log(userinfo, "yay!");
                         return done(null, userinfo);
                     })
-                    // .catch(function (err) {
-                    //     console.log('Error:', err);
-
-                    //     return done(null, false, {
-                    //         message: 'Something went wrong with your Login'
-                    //     });
-                    // });
                     )}
         )
     );

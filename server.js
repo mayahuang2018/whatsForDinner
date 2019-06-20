@@ -4,6 +4,9 @@ const express = require("express");
 const app = express();
 
 const exphbs = require("express-handlebars");
+const helpers = require("handlebars-helpers");
+const array = helpers.array();
+
 const passport = require("passport");
 const session = require("express-session");
 // const flash = require("connect-flash");
@@ -42,6 +45,7 @@ const viewsPath = path.join(__dirname, 'views');
 const layoutsPath = path.join(viewsPath, 'layouts');
 const partialsPath = path.join(viewsPath, 'partials');
 app.set('views', viewsPath);
+app.set('partials', partialsPath);
 
 // Handlebars
 app.engine(
