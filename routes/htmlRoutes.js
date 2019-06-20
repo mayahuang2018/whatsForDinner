@@ -17,17 +17,11 @@ module.exports = (app) => {
         res.render("signup")
     });
   
-    // // displays search page
-    // app.get("/search", (req, res) => {
-    //     res.render("search", req.session.passport.user)
-    // });
-  
     // if does not have account send to signup page
       app.get("/signup", (req, res) => {
           console.log(800) 
           res.render("signup");
         });  
-  
   
     //   search and recipepuppy response route
       app.get("/search", (req, res) => {
@@ -71,4 +65,4 @@ module.exports = (app) => {
      });
   
      console.log("htmlRoutes available");
-  }
+  };

@@ -24,9 +24,7 @@ $(document).ready(function () {
             ingredients: response[i].ingredients,
             thumbnail: response[i].thumbnail
           };
-          console.log(cardInfo);
-
-          
+          console.log(cardInfo); 
         });
 
         
