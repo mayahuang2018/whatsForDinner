@@ -46,7 +46,6 @@ const layoutsPath = path.join(viewsPath, 'layouts');
 const partialsPath = path.join(viewsPath, 'partials');
 app.set('views', viewsPath);
 app.set('partials', partialsPath);
-exphbs.registerPartial("searchresults", "{{title}}", "{{ingredients}}");
 
 // Handlebars
 app.engine(

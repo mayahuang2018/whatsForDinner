@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  exphbs.registerPartial("searchresults", "{{title}}", "{{ingredients}}");
+
   function recipes() {
     $(".search-results").empty();
 
