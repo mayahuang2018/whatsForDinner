@@ -4,23 +4,20 @@
     "password": "4dbb2182",
     "database": "dinner_db",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "port": "3306"
+    "dialect": "mysql"
   },
   "test": {
     "username": "bd869b22db3863",
     "password": "4dbb2182",
     "database": "dinner_db",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "port": "3306"
+    "dialect": "mysql"
   },
   "production": {
     "username": "bd869b22db3863",
     "password": "4dbb2182",
     "database": "dinner_db",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "port": "3306"
+    "dialect": "mysql"
   }
 }
