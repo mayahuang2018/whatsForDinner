@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "bd869b22db3863",
-    "password": "4dbb2182",
+    "username": "root",
+    "password": "docker",
     "database": "dinner_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port": "3310"
   },
   "test": {
     "username": "bd869b22db3863",

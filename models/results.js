@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = function(sequelize, DataTypes) {
     var apiResults = sequelize.define('apiResults', {
         
         id: {
@@ -23,12 +23,20 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             notEmpty: false
         },
-        userId:
+        userID:
         {
             type: DataTypes.INTEGER,
             notEmpty: true, 
         }
     });
+
+    apiResults.associate = function(models) {
+        apiResults.belongsTo(models.user, {
+            foreignKey: "userId",
+            allowNull: false
+        });
+    };
+    
 
     return apiResults;
 

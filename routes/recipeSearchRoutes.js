@@ -3,29 +3,27 @@ const db = require("../models");
 
 module.exports = app => {
     // Get all examples
-    app.get("/search", (req, res) => {
+    app.get("/searchresults", (req, res) => {
         if (req.isAuthenticated()) {
-            db.apiResponses.findAll({})
-                .then((dbapiResponse) => {
-                    console.log("dbapiResponse", dbapiResponses);
+            db.apiResults.findAll({})
+                .then((dbResults) => {
+                    console.log("dbResults", dbResults);
 
                     const hbsObj = {
                         items: [],
-                        id: req.session.passport.user,
+                        id: req.session.passport.user.id,
                         isLoggedIn: req.isAuthenticated()
                     }
-                    dbapiResponse.forEach((item) => {
+                    dbresults.forEach((item) => {
                         hbsObj.items.push(item.dataValues)
                     })
-                    res.render("search", hbsObj)
+                    res.render("searchresults", hbsObj)
                 })         
         } else {
             res.redirect("/");
         }
     }).catch(err => {
-    console.log(err, req.query.apiResponse)
+    console.log(err, req.query.apiResults)
     });
+};
 
-}
-
-// we were going towards the ability to search the saved recipies. we did not get to this part.

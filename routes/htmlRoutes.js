@@ -6,10 +6,14 @@ module.exports = (app) => {
           console.log(700)
         res.render("index");
     });
+
+    app.get("/index", (req, res) => {
+      res.render("index");
+  });
   
     // displays login page
-      app.get("/index", (req, res) => {
-        res.render("index");
+      app.get("/login", (req, res) => {
+        res.render("login");
     });
   
     // displays signup page

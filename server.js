@@ -5,7 +5,7 @@ const app = express();
 
 const exphbs = require("express-handlebars");
 const helpers = require("handlebars-helpers");
-const array = helpers.array();
+
 
 const passport = require("passport");
 const session = require("express-session");

@@ -5,13 +5,14 @@ module.exports = (app) => {
     app.get("/api/shoppingLists", (req, res) => {
         db.shoppingLists.findAll({}).then(dbshoppingLists => {
             res.json(dbshoppingLists);
+            console.log(dbshoppingLists);
         });
     });
 
-    app.get("/api/shoppingLists", (req, res) => {
+    app.get("/api/shoppingLists/:title", (req, res) => {
         db.shoppingLists.findOne({
             where: {
-                id: req.params
+                title: req.params.title
             }
         }).then(dbshoppingLists => {
             res.json(dbshoppingLists);
@@ -24,7 +25,7 @@ module.exports = (app) => {
         const shoppingListObj = {
             title: req.body.title,
             ingredients: req.body.ingredients,
-            userID: req.session.passport.user
+            userID: req.session.passport.user.id
         };
         console.log(shoppingListObj);
         db.shoppingLists.create(shoppingListObj).then(function (dbshoppingLists) {
