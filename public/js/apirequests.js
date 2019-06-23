@@ -51,7 +51,8 @@ const db =
       const $card = $(this).closest(".card");
       const title = $card.find(".card-title").text().trim();
       const ingredients = $card.find(".card-content").text().replace("\n", "").trim();
-      const link = $card.find(".card-action").text().trim();
+      const link = $card.find(".card-action").find("a").attr("href");
+      // need to fix link
 
       console.log(this);
       $.ajax("/api/results/", {
