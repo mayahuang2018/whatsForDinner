@@ -2,46 +2,42 @@ const db = require("../models");
 
 module.exports = (app) => {
     // Get all examples
-    app.get("/api/shoppingLists", (req, res) => {
-        db.shoppingLists.findAll({}).then(dbshoppingLists => {
-            res.json(dbshoppingLists);
-        });
-    });
 
-    app.get("/api/shoppingLists", (req, res) => {
-        db.shoppingLists.findOne({
+    app.get("/api/favs", (req, res) => {
+        db.favs.findOne({
             where: {
                 id: req.params
             }
-        }).then(dbshoppingLists => {
-            res.json(dbshoppingLists);
+        }).then(dbfavs => {
+            res.json(dbfavs);
         });
     })
 
-    app.post("/api/shoppingLists", (req, res) => {
-        console.log("post shopping list");
+    app.post("/api/favs", (req, res) => {
+        console.log("post favs");
 
-        const shoppingListObj = {
+        const favsObj = {
             title: req.body.title,
             ingredients: req.body.ingredients,
+            link: req.body.link,
             userID: req.session.passport.user
         };
-        console.log(shoppingListObj);
-        db.shoppingLists.create(shoppingListObj).then(function (dbshoppingLists) {
-            res.json(dbshoppingLists);
+        console.log(favsObj);
+        db.favs.create(favObj).then(function (dbfavs) {
+            res.json(dbfavs);
             console.log("created");
         })
     });
 
-    app.delete("/api/shoppingLists/:id", function (req, res) {
-        db.shoppingLists.destroy({
+    app.delete("/api/favs/:id", function (req, res) {
+        db.favs.destroy({
             where: {
                 id: req.params.id
             }
-        }).then(function (dbshoppingLists) {
-            res.json(dbshoppingLists);
+        }).then(function (dbfavs) {
+            res.json(dbfavs);
         })
     });
 
-    console.log("favsRoutes available");
+    console.log("favRoutes available");
 }

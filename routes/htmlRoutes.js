@@ -40,7 +40,7 @@ module.exports = (app) => {
     // fav recipes route
       app.get("/favRecipes", (req, res) => {
         if (req.isAuthenticated()) {
-          res.render("results", req.session.passport.user);
+          res.render("favRecipes", req.session.passport.user);
         } else {
           res.render("index");
         }
