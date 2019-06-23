@@ -25,6 +25,7 @@ const db =
             $("#searchResults").append(`<div class="card z-depth-5">
   <div class="card-image, recipeCard">
     <span class="card-title">${results.title}</span>
+    <a class="addRec btn btn-floating halfway-fab waves-effect waves-light #ef9a9a red lighten-3"> <i class="material-icons">favorite_border</i></a>
   </div>
   <div class="card-content">
     <p>${results.ingredients}</p>
@@ -36,21 +37,32 @@ const db =
           })
         }
       }); //ajax get
-    }); // on click
-  });
+    }); // on click search
 
+    $("#searchResults").on("click", ".addRec", function (e) {
+      console.log("clicked on addRec");
+      e.preventDefault();
+      $(this).addClass("favRec");
+    })
 
-// $.ajax("../api/apiResults", {
-//     type: "POST",
-//     dataType: "json",
-//     data: {
-//       "title": response.results.title,
-//       "link": response.results.href,
-//       "ingredients": response.results.ingredients,
-//       "thumbnail": response.results.thumbnail
-//     },
-//     success: function(response) {
-//       console.log(response);                
-//       return response
-//     } 
-//   });    
+    $("#searchResults").on("click", ".favRec", function (e) {
+      e.preventDefault();
+      console.log("clicked");
+      const $card = $(this).closest(".card");
+      const title = $card.find(".card-title").text().trim();
+      const ingredients = $card.find(".card-content").text().replace("\n", "").trim();
+      const link = $card.find(".card-action").text().trim();
+
+      console.log(this);
+      $.ajax("/api/results/", {
+        type: "POST",
+        dataType: "json",
+        data: {
+          "title": title,
+          "link": link,
+          "ingredients": ingredients,
+        }
+      }); //ajax post
+    }); //on click fav
+
+  }); // document
