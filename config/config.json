@@ -11,14 +11,14 @@
     "username": "bd869b22db3863",
     "password": "4dbb2182",
     "database": "dinner_db",
-    "host": "127.0.0.1",
+    "host": "heroku_9c9f78cbffbcf9c",
     "dialect": "mysql"
   },
   "production": {
     "username": "bd869b22db3863",
     "password": "4dbb2182",
     "database": "dinner_db",
-    "host": "127.0.0.1",
+    "host": "heroku_9c9f78cbffbcf9c",
     "dialect": "mysql"
   }
 }
