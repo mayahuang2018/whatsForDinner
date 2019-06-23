@@ -2,11 +2,11 @@ const db =
   $(document).ready(function () {
     console.log("apirequests");
 
-    $(".search-results").empty();
+    
 
     $("#searchAPI").on("click", function (e) {
       e.preventDefault();
-
+      $(".search-results").empty();
       const searchTerm = $("#recipe-input").val().trim();
       console.log(searchTerm);
       // add some js to separate multiple search terms by comma
