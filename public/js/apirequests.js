@@ -43,10 +43,6 @@ const db =
       console.log("clicked on addRec");
       e.preventDefault();
       $(this).addClass("favRec");
-    })
-
-    $("#searchResults").on("click", ".favRec", function (e) {
-      e.preventDefault();
       console.log("clicked");
       const $card = $(this).closest(".card");
       const title = $card.find(".card-title").text().trim();
