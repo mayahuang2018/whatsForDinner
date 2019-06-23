@@ -24,14 +24,14 @@ module.exports = function(sequelize, DataTypes) {
 
     });
 
-    shoppingLists.associate = function(models) {
-        // We're saying that a shoppinglist should belong to an User
-        // A shoppingList can't be created without an User due to the foreign key constraint
-        shoppingLists.belongsTo(models.user, {
-            foreignKey: "userId",
-            allowNull: false
-        });
-    };
+    // shoppingLists.associate = function(models) {
+    //     // We're saying that a shoppinglist should belong to an User
+    //     // A shoppingList can't be created without an User due to the foreign key constraint
+    //     shoppingLists.belongsTo(models.user, {
+    //         foreignKey: "userId",
+    //         allowNull: false
+    //     });
+    // };
 
 
 return shoppingLists;

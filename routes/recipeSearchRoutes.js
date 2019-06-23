@@ -3,27 +3,18 @@ const db = require("../models");
 
 module.exports = app => {
     // Get all examples
-    app.get("/searchresults", (req, res) => {
+    app.get("/api/apiResults", (req, res) => {
         if (req.isAuthenticated()) {
             db.apiResults.findAll({})
                 .then((dbResults) => {
-                    console.log("dbResults", dbResults);
-
-                    const hbsObj = {
-                        items: [],
-                        id: req.session.passport.user.id,
-                        isLoggedIn: req.isAuthenticated()
-                    }
-                    dbresults.forEach((item) => {
-                        hbsObj.items.push(item.dataValues)
-                    })
-                    res.render("searchresults", hbsObj)
-                })         
+                    res.json(dbResults);  
+                }) 
         } else {
-            res.redirect("/");
-        }
+            res.redirect("/search");
+        } 
     }).catch(err => {
-    console.log(err, req.query.apiResults)
-    });
+    console.log(err)
+    }); 
 };
+
 
