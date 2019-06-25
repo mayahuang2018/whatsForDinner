@@ -1,6 +1,6 @@
 
 
-module.exports = (app) => {
+module.exports = app => {
   
     app.get("/", (req, res) => {
           console.log(700)
@@ -23,13 +23,13 @@ module.exports = (app) => {
   
     // if does not have account send to signup page
       app.get("/signup", (req, res) => {
-          console.log(800) 
+          console.log(800);
           res.render("signup");
         });  
   
     //   search and recipepuppy response route
       app.get("/search", (req, res) => {
-          console.log(900)
+          console.log(900);
         if (req.isAuthenticated()) {
           res.render("search", req.session.passport.user);
         } else {
@@ -39,6 +39,7 @@ module.exports = (app) => {
   
     // fav recipes route
       app.get("/favRecipes", (req, res) => {
+        console.log(1000);
         if (req.isAuthenticated()) {
           res.render("favRecipes", req.session.passport.user);
         } else {

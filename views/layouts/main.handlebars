@@ -16,14 +16,13 @@
 </head>
 
 <body>
-  <nav class="N/A transparent z-depth-5 nav-extended">
+  <nav id="nav" class="N/A transparent z-depth-5 nav-extended">
   <div class="nav-wrapper">
     <a href="/" class="brand-logo">What's for dinner?</a>
     <ul id="nav-mobile" class="right">
-
       <li><a href="/index"> <i class="material-icons left">account_circle</i>Hello, {{username}}!</a></li>
-      <li><a href="/favRecipes"> favs </a></li>
-      <li><a href="/shoppingList"> shopping </a></li>
+      <li><a id="favButton" href="/favRecipes"> favs </a></li>
+      <li><a id ="shoppingListButton" href="/shoppingList"> shopping </a></li>
     </ul>
   </div>
 </nav>

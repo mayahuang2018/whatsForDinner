@@ -8,9 +8,7 @@ module.exports = (app, passport) => {
             // failureFlash: true
         }),
     );
-   
-
-    // sends through local strategy for login, and if success to search
+       // sends through local strategy for login, and if success to search
         app.post("/index",
             passport.authenticate("local-login", {
                 successRedirect: "/search",

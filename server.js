@@ -36,12 +36,11 @@ app.use(passport.session());
 console.log("300");
  
 // Routes
-require("./routes/favRoutes")(app);
-require("./routes/recipeSearchRoutes")(app);
-require("./routes/shoppingListRoutes")(app);
+require("./routes/favRecipeRoutes");
+require("./routes/shoppingListRoutes");
 require("./routes/htmlRoutes")(app, passport);
 require("./routes/passportRoutes")(app, passport);
-console.log("350")
+console.log("350");
 
 
 const viewsPath = path.join(__dirname, 'views');

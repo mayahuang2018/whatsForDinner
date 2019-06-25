@@ -1,8 +1,6 @@
-const db =
+
   $(document).ready(function () {
     console.log("apirequests");
-
-    
 
     $("#searchAPI").on("click", function (e) {
       e.preventDefault();
@@ -50,7 +48,7 @@ const db =
       const link = $card.find(".card-action").find("a").attr("href");
       // need to fix link
 
-      console.log(this);
+      console.log(this, "addRec clicked");
       $.ajax("/api/results/", {
         type: "POST",
         dataType: "json",
@@ -62,4 +60,25 @@ const db =
       }); //ajax post
     }); //on click fav
 
-  }); // document
+    // $("#nav").on("click", "#favsButton", function (e) {
+    //   e.preventDefault();
+    //   console.log("clicked favs");
+    //   const userID = req.session.passport.user
+    //   $.ajax("/api/results" + userID, {
+    //     type: "GET",
+    //     data: {
+    //       title: title,
+    //       ingredients: ingredients,
+    //       link: href,
+    //     }
+    //   }).then(
+    //     () => {
+    //       console.log("get favs");
+    //       res.render("favRecipes", {
+    //         title: data.title,
+    //         ingredients: data.ingredients,
+    //       });
+    //     }
+    //   )
+      
+    }); // document

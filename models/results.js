@@ -29,12 +29,12 @@ module.exports = function(sequelize, DataTypes) {
             notEmpty: true, 
         }
     });
-    // results.associate = function(models) {
-    //     results.belongsTo(models.user, {
-    //         foreignKey: "userId",
-    //         allowNull: false
-    //     });
-    // };
+    results.associate = function(models) {
+        results.belongsTo(models.user, {
+            foreignKey: "userId",
+            allowNull: false
+        });
+    };
     
     return results;
 

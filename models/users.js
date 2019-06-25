@@ -45,13 +45,21 @@ module.exports = function(sequelize, DataTypes) {
 
     });
 
-    // user.associate = function(models) {
-    //     // Associating user with shoppingList
-    //     // When an user is deleted, also delete any associated shoppingList
-    //     user.hasMany(models.shoppingLists, {
-    //       onDelete: "cascade"
-    //     });
-    //   };
+    user.associate = function(models) {
+        // Associating user with shoppingList
+        // When an user is deleted, also delete any associated shoppingList
+        user.hasMany(models.shoppingLists, {
+          onDelete: "cascade"
+        });
+      };
+
+      user.associate = function(models) {
+        // Associating user with shoppingList
+        // When an user is deleted, also delete any associated shoppingList
+        user.hasMany(models.results, {
+          onDelete: "cascade"
+        });
+      };
 
     return user;
 
