@@ -1,0 +1,35 @@
+<br>
+<br>
+
+<div class="container transparent">
+ 
+<div class="container transparent">
+
+ <div class="row">
+    <div class="col s12">
+      <div class="card"> 
+        <div class="card-content #424242 grey-text text-darken-3">
+          <span class="card-title">Favorites</span>
+
+      {{#each results}}
+      <hr>
+      <div class="row">
+        <div class="col s12">
+          <div id="title">Recipe Name:  {{title}}</div>
+          <div id="ingredients">Ingredients: {{ingredients}} </div>
+        </div>
+      </div>
+      <hr>
+      {{/each}}
+        
+        </div>
+        <div class="card-action">
+           <a href="/search" class="#5d4037 brown-text text-darken-2">← Didn't find anything? Search again!</a>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>  
+
+
+

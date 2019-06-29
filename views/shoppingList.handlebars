@@ -1,0 +1,36 @@
+<div class="container">
+
+ <div class="row">
+    <div class="col s12">
+      <div class="card"> 
+        <div class="card-content #424242 grey-text text-darken-3">
+          <span class="card-title">Shopping List</span>
+
+
+   <form method="POST" action="/api/shoppingLists">
+      <div class="row">
+        <div class="input-field col s6">
+          {{!-- <input id="receipe_name" type="text" class="validate"> --}}
+          <input name="title" for="receipe_name">Recipe Name:  </input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          {{!-- <textarea id="textarea1" class="materialize-textarea"></textarea> --}}
+          <input name="ingredients" for="textarea1">Ingredients:  </input>
+        </div>
+      </div>
+       {{!-- <button id="submitList" class="btn #90a4ae blue-grey lighten-2">Save to favorites</button> --}}
+    </form>
+        
+        </div>
+        <div class="card-action">
+           <a href="/search" class="#5d4037 brown-text text-darken-2">← Back To Home</a>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>  
+
+
+
