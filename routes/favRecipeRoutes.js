@@ -2,43 +2,78 @@ const db = require("../models");
 
 module.exports = app => {
 
-    // Get all examples
-    app.get("/api/results", (req, res) => {
-        if (req.isAuthenticated()) {
-            db.results.findAll({
-                where: {
-                   userID: req.session.passport.user
-                }
-            })
-                .then(dbresults => {
-                    res.json(dbresults);  
-                });
-        } else {
-            res.redirect("/search");
-        } 
-    });
-    
-    
+    // app.get("/api/users", (req, res) => {
+    //     db.users.findAll({
+    //         include: [{
+    //             model: db.results,    
+    //         }]
+    //     }).then(users => {
+    //         const resObj = users.map(user => {
+    //             return Object.assign(
+    //                 {},
+    //                 {
+    //                     user_id: user.user_id,
+    //                     username: username,
+    //                     results: user.results.map(results => {
+    //                         return Object.assign(
+    //                             {},
+    //                             {
+    //                                 results_id: results.id,
+    //                                 user_id: results.user_id,
+    //                                 title: dbResults,
+    //                                 ingredients: dbResults
+    //                             } 
+    //                         )
+    //                     })
+    //                 }
+    //             )
+    //         });
+    //         res.json(resObj);
+    //     });
+    // })
 
-    app.get("/api/results/:userID", (req, res) => {
-        db.users.findOne({
-            where: {
-                id: req.session.passport.userID
-            }
-        }).then(dbusers => {
-            db.results.findAll({
-                include: [db.users],
+    // Get all examples
+    app.get("/api/results", (req, res) => {  
+            db.user.findOne(
+                {
                 where: {
-                    userId: req.params.id
+                   id: req.session.passport.user.id
                 }
-            }).then(dbresults => {
-                res.render("favRecipes.handlebars", {
-                    title: dbresults,
-                    ingredients: dbresults
+            }).then(() => {
+                db.results.findAll({
+                    include: [db.user],
+                    where: {
+                        user_id: req.session.passport.user.id 
+                    }
+                }).then(dbResults => {
+                    res.render("favRecipes", {
+                        title: dbResults,
+                        ingredients: dbResults
+                    });
                 });
             });
-        });
-    });
+        });            
+       
+
+    // app.get("/api/results/:userID", (req, res) => {
+    //     db.users.findOne({
+    //         where: {
+    //             id: req.session.passport.userID
+    //         }
+    //     }).then(dbusers => {
+    //         db.results.findAll({
+    //             include: [db.users],
+    //             where: {
+    //                 userId: req.params.id
+    //             }
+    //         }).then(dbresults => {
+    //             res.render("favRecipes", {
+    //                 title: dbresults,
+    //                 ingredients: dbresults
+    //             });
+    //         });
+    //     });
+    // });
 
     app.post("/api/results", (req, res) => {
         console.log("post results");
@@ -46,7 +81,7 @@ module.exports = app => {
         const resultsObj = {
             title: req.body.title,
             ingredients: req.body.ingredients,
-            userID: req.session.passport.user.id
+            user_id: req.session.passport.user.id
         };
         console.log(resultsObj);
         db.results.create(resultsObj).then(dbresults => {
@@ -55,6 +90,7 @@ module.exports = app => {
         })
     }); 
 
-console.log("recipeSearchRoutes available");
+    console.log("favRecipeRoutes available");
+// });
 
-}
+};
