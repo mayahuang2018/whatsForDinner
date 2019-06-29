@@ -29,3 +29,4 @@ An app to help the user decide what to make for dinner based off what they have 
 * Front-end UI (Maya)
 * Database creation/maintenance (Hilary)
 * API Routes/middleware (Jennifer)
+*Passport.js and BCrypt (Jennifer)
