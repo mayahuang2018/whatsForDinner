@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 
 const exphbs = require("express-handlebars");
-const helpers = require("handlebars-helpers");
+const helpers = require("handlebars-helpers")();
 
 
 const passport = require("passport");
@@ -36,7 +36,8 @@ app.use(passport.session());
 console.log("300");
  
 // Routes
-require("./routes/favRecipeRoutes");
+// require("./routes/resultsRoutes")(app, passport);
+require("./routes/favRecipeRoutes")(app);
 require("./routes/shoppingListRoutes");
 require("./routes/htmlRoutes")(app, passport);
 require("./routes/passportRoutes")(app, passport);

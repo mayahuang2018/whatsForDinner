@@ -1,26 +1,26 @@
 {
-  "development": {
-    "username": "root",
-    "password": "docker",
-    "database": "dinner_db",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "port": "3310"
-  },
-  "test": {
-    "username": "bd869b22db3863",
-    "password": "4dbb2182",
-    "database": "dinner_db",
-    "host": "heroku_9c9f78cbffbcf9c",
-    "dialect": "mysql",
-    "port": "3306"
-  },
-  "production": {
-    "username": "bd869b22db3863",
-    "password": "4dbb2182",
-    "database": "dinner_db",
-    "host": "heroku_9c9f78cbffbcf9c",
-    "dialect": "mysql",
-    "port": "3306"
+    "development": {
+      "username": "root",
+      "password": "docker",
+      "database": "dinner_db",
+      "host": "127.0.0.1",
+      "dialect": "mysql",
+      "port": "3320"
+    },
+    "test": {
+      "username": "root",
+      "password": "docker",
+      "database": "dinner_db",
+      "host": "127.0.0.1",
+      "dialect": "mysql",
+      "port": "3320"
+    },
+    "production": {
+      "username": "xli9wp43gl6bsvx2",
+      "password": "wi4f98xwvu101qj7",
+      "database": "dzqhp8ozrm90loox",
+      "host": "alv4v3hlsipxnujn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+      "dialect": "mysql",
+      "port": "3306"
+    }
   }
-}

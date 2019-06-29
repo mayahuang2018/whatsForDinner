@@ -23,15 +23,15 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             notEmpty: false
         },
-        userID:
+        user_id:
         {
             type: DataTypes.INTEGER,
-            notEmpty: true, 
+            allowNull: false, 
         }
     });
     results.associate = function(models) {
         results.belongsTo(models.user, {
-            foreignKey: "userId",
+            foreignKey: "user_id",
             allowNull: false
         });
     };

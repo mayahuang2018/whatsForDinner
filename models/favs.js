@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
             notEmpty: true
         },
        
-        userID:
+        user_id:
         {
             type: DataTypes.INTEGER,
             notEmpty: true, 
@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     });
     favs.associate = function(models) {
         favs.belongsTo(models.user, {
-            foreignKey: "userId",
+            foreignKey: "user_id",
             allowNull: false
         });
     };

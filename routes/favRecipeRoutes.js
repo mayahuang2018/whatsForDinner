@@ -1,27 +1,61 @@
 const db = require("../models");
-const express = require("express");
-const router = express.Router();
 
+module.exports = app => {
+
+    // app.get("/api/users", (req, res) => {
+    //     db.users.findAll({
+    //         include: [{
+    //             model: db.results,    
+    //         }]
+    //     }).then(users => {
+    //         const resObj = users.map(user => {
+    //             return Object.assign(
+    //                 {},
+    //                 {
+    //                     user_id: user.user_id,
+    //                     username: username,
+    //                     results: user.results.map(results => {
+    //                         return Object.assign(
+    //                             {},
+    //                             {
+    //                                 results_id: results.id,
+    //                                 user_id: results.user_id,
+    //                                 title: dbResults,
+    //                                 ingredients: dbResults
+    //                             } 
+    //                         )
+    //                     })
+    //                 }
+    //             )
+    //         });
+    //         res.json(resObj);
+    //     });
+    // })
 
     // Get all examples
-    router.get("/api/results", (req, res) => {
-        if (req.isAuthenticated()) {
-            db.results.findAll({
+    app.get("/api/results", (req, res) => {  
+            db.user.findOne(
+                {
                 where: {
-                   userID: req.session.passport.user
+                   id: req.session.passport.user.id
                 }
-            })
-                .then(dbresults => {
-                    res.json(dbresults);  
+            }).then(() => {
+                db.results.findAll({
+                    include: [db.user],
+                    where: {
+                        user_id: req.session.passport.user.id 
+                    }
+                }).then(dbResults => {
+                    res.render("favRecipes", {
+                        title: dbResults,
+                        ingredients: dbResults
+                    });
                 });
-        } else {
-            res.redirect("/search");
-        } 
-    });
-    
-    
+            });
+        });            
+       
 
-    // router.get("/api/results/:userID", (req, res) => {
+    // app.get("/api/results/:userID", (req, res) => {
     //     db.users.findOne({
     //         where: {
     //             id: req.session.passport.userID
@@ -33,7 +67,7 @@ const router = express.Router();
     //                 userId: req.params.id
     //             }
     //         }).then(dbresults => {
-    //             res.render("favRecipes.handlebars", {
+    //             res.render("favRecipes", {
     //                 title: dbresults,
     //                 ingredients: dbresults
     //             });
@@ -41,21 +75,22 @@ const router = express.Router();
     //     });
     // });
 
-    // router.post("/api/results", (req, res) => {
-    //     console.log("post results");
+    app.post("/api/results", (req, res) => {
+        console.log("post results");
 
-    //     const resultsObj = {
-    //         title: req.body.title,
-    //         ingredients: req.body.ingredients,
-    //         userID: req.session.passport.user.id
-    //     };
-    //     console.log(resultsObj);
-    //     db.results.create(resultsObj).then(dbresults => {
-    //         res.json(dbresults);
-    //         console.log("created");
-    //     })
-    // }); 
+        const resultsObj = {
+            title: req.body.title,
+            ingredients: req.body.ingredients,
+            user_id: req.session.passport.user.id
+        };
+        console.log(resultsObj);
+        db.results.create(resultsObj).then(dbresults => {
+            res.json(dbresults);
+            console.log("created");
+        })
+    }); 
 
-console.log("recipeSearchRoutes available");
+    console.log("favRecipeRoutes available");
+// });
 
-module.exports = router;
+};
