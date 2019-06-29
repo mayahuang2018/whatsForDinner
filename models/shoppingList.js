@@ -24,15 +24,15 @@ module.exports = (sequelize, DataTypes) => {
         
     });
 
-    shoppingLists.associate = models => {
-        // We're saying that a Post should belong to an Author
-        // A Post can't be created without an Author due to the foreign key constraint
-        shoppingLists.belongsTo(models.user, {
-          foreignKey: "userID", 
-            allowNull: false
-          }
-        );
-      };
+    // shoppingLists.associate = models => {
+    //     // We're saying that a Post should belong to an Author
+    //     // A Post can't be created without an Author due to the foreign key constraint
+    //     shoppingLists.belongsTo(models.user, {
+    //       foreignKey: "userID", 
+    //         allowNull: false
+    //       }
+    //     );
+    //   };
 
     return shoppingLists;
 

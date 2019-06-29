@@ -45,12 +45,17 @@ module.exports = app => {
                     where: {
                         user_id: req.session.passport.user.id 
                     }
-                }).then(dbResults => {
+                }).then(() => {
+                    hbsObj = {
+                        "title": db.results.title,
+                        "ingredients": db.results.ingredients
+                    }
+                }).then(() => {
                     res.render("favRecipes", {
-                        title: dbResults,
-                        ingredients: dbResults
+                        hbsObj
                     });
                 });
+                res.json(hbsObj)
             });
         });            
        

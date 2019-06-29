@@ -23,7 +23,7 @@
             $("#searchResults").append(`<div class="card z-depth-5">
   <div class="card-image, recipeCard">
     <span class="card-title">${results.title}</span>
-    <a class="addRec btn btn-floating halfway-fab waves-effect waves-light #ef9a9a red lighten-3"> <i class="material-icons">favorite_border</i></a>
+    <a class="addRec btn btn-floating waves-effect waves-light #ef9a9a red lighten-3"> <i class="material-icons">favorite_border</i></a>
   </div>
   <div class="card-content">
     <p>${results.ingredients}</p>
@@ -46,6 +46,7 @@
       const title = $card.find(".card-title").text().trim();
       const ingredients = $card.find(".card-content").text().replace("\n", "").trim();
       const link = $card.find(".card-action").find("a").attr("href");
+      // const user_id = req.session.passport.user.id
       // need to fix link
 
       console.log(this, "addRec clicked");
@@ -56,30 +57,30 @@
           "title": title,
           "link": link,
           "ingredients": ingredients,
+          "user_id": req.session.passport.user.id
         }
       }); //ajax post
     }); //on click fav
 
-    $("#nav").on("click", "#favsButton", function (e) {
+    
+    $("#favs").on("click", "#getFavs", function (e) {
       e.preventDefault();
-      console.log("clicked favs");
-      const userID = req.session.passport.user
-      $.ajax("/api/results" + userID, {
-        type: "GET",
-        data: {
-          title: title,
-          ingredients: ingredients,
-          link: href,
-        }
-      }).then(
-        () => {
-          console.log("get favs");
-          res.render("favRecipes", {
-            title: data.title,
-            ingredients: data.ingredients,
-          });
-        }
-      )
-    });
-      
-    }); // document
+      console.log("clicked favs"); 
+        $.ajax("/api/results/", {
+          type: "GET",
+          dataType: "json",
+          // data: {
+          //   "title": results.title,
+          //   "ingredients": results.ingredients
+          // }
+        })
+        .then(
+          console.log("get favs")
+        );
+    }); //end click getFavs
+    
+
+
+
+
+  }); // document
