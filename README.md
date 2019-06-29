@@ -1,5 +1,9 @@
 # whatsForDinner
 
+# https://whatsfordinner-project.herokuapp.com/index
+
+# see also, https://github.com/jperlmanmoore/wfd3
+
 # Team Members
 
 * Maya Huang
