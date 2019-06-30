@@ -1,6 +1,6 @@
 # whatsForDinner
 
-# https://whatsfordinner-project.herokuapp.com/index
+# https://whatsfordinner-project.herokuapp.com/index  - it appears that the recipepuppy API, which is what we used is no longer returning results of a serched term.
 
 # see also, https://github.com/jperlmanmoore/wfd3
 
